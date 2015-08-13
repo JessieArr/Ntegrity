@@ -1,0 +1,6 @@
+*/obj/Debug/TemporaryGeneratedFile*.cs
+Ntegrity.Test/Ntegrity.Test.v2.ncrunchproject
+*.ncrunchproject
+packages/*
+*.ncrunchsolution
+*/obj/Debug/*
