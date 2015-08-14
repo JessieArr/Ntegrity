@@ -7,8 +7,8 @@
     <ProjectGuid>{40B052F2-CAD0-41D5-9179-0DBF8768E952}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestTargetAssembly</RootNamespace>
-    <AssemblyName>TestTargetAssembly</AssemblyName>
+    <RootNamespace>Ntegrity.TestTargetAssembly</RootNamespace>
+    <AssemblyName>Ntegrity.TestTargetAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITargetInterface.cs" />
-    <Compile Include="TargetClass.cs" />
+    <Compile Include="IPublicInterface.cs" />
+    <Compile Include="PublicClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicEnum.cs" />
+    <Compile Include="PublicStruct.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

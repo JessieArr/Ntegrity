@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,44 +37,5 @@ namespace Ntegrity
 					return;
 			}
 		}
-	}
-
-	public class TypeInterfaceData
-	{
-		public readonly TypeEnum Type;
-		public readonly List<ConstructorData> ConstructorData;
-
-		public TypeInterfaceData(Type typeToAnalyze)
-		{
-			if (typeToAnalyze.IsClass)
-			{
-				Type = TypeEnum.Class;
-			}
-			if (typeToAnalyze.IsInterface)
-			{
-				Type = TypeEnum.Interface;
-			}
-			if (Type == null)
-			{
-				throw new NtegrityException("Unable to determine data type for type: " + typeToAnalyze.AssemblyQualifiedName);
-			}
-		}
-	}
-
-	public enum TypeEnum
-	{
-		Class,
-		Interface
-	}
-
-	public class ConstructorData
-	{
-		public string ConstructorSignature { get; set; }
-		public List<AttributeData> AttributeData { get; set; } 
-	}
-
-	public class AttributeData
-	{
-		public string Name { get; set; }
 	}
 }

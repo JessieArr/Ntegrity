@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestTargetAssembly
 {
-    public class TargetClass : ITargetInterface
-    {
-    }
+	public enum PublicEnum
+	{
+	}
 }

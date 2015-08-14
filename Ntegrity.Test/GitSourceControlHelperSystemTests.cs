@@ -3,7 +3,7 @@
 namespace Ntegrity.Test
 {
 	[TestFixture]
-	public class GitSourceControlHelperTests
+	public class GitSourceControlHelperSystemTests
 	{
 		private GitSourceControlHelper _SUT;
 		[SetUp]
