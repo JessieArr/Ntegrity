@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ntegrity.TestTargetAssembly
 {
-	public enum PublicEnum
+	[TestAttribute("Something")]
+	class PublicClassWithAttributes
 	{
 	}
 }

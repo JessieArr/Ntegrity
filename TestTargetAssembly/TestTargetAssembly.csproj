@@ -41,11 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerClass.cs" />
+    <Compile Include="InternalAbstractClass.cs" />
+    <Compile Include="InternalClass.cs" />
     <Compile Include="IPublicInterface.cs" />
     <Compile Include="PublicClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicClassWithAttributes.cs" />
     <Compile Include="PublicEnum.cs" />
+    <Compile Include="PublicSealedClass.cs" />
     <Compile Include="PublicStruct.cs" />
+    <Compile Include="StaticClass.cs" />
+    <Compile Include="TestAttributeAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

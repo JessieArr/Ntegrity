@@ -10,5 +10,10 @@ namespace Ntegrity
 		{
 			Name = attribute.ToString();
 		}
+
+		public override string ToString()
+		{
+			return "[" + Name + "]";
+		}
 	}
 }

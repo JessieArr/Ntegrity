@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ntegrity.TestTargetAssembly
 {
-	public enum PublicEnum
+	public class TestAttributeAttribute : Attribute
 	{
+		public string Text;
+		public TestAttributeAttribute(string text)
+		{
+			Text = text;
+		}
 	}
 }
