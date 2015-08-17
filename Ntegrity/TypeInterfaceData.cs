@@ -115,9 +115,9 @@ namespace Ntegrity
 
 			foreach (var attribute in AttributeData)
 			{
-				returnString += attribute + Environment.NewLine;
+				returnString += prefix + attribute + Environment.NewLine;
 			}
-			returnString += AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
+			returnString += prefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
 
 			if (Type == TypeEnum.Class)
 			{
@@ -139,7 +139,16 @@ namespace Ntegrity
 			}
 			
 			returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
-			returnString += Name;
+			returnString += Name + Environment.NewLine;
+
+		    if (ConstructorData.Count > 0)
+		    {
+                returnString += prefix + "CONSTRUCTORS:" + Environment.NewLine;
+                foreach (var constructor in ConstructorData)
+                {
+                    returnString += prefix + constructor.ToString(prefix) + Environment.NewLine;
+                }
+            }
 
 			return returnString;
 		}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Ntegrity
 {
@@ -35,5 +36,15 @@ namespace Ntegrity
 				AttributeData.Add(new AttributeData(attribute));
 			}
 		}
-	}
+
+        public override string ToString()
+        {
+            return ToString("");
+        }
+
+        public string ToString(string prefix)
+        {
+            return prefix + AccessLevel.GetKeywordFromEnum() + " " + ConstructorSignature;
+        }
+    }
 }

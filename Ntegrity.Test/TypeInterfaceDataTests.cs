@@ -85,7 +85,7 @@ namespace Ntegrity.Test
 		{
 			var SUT = new TypeInterfaceData(typeof(PublicSealedClass));
 			var stringRepresentation = SUT.ToString();
-			Assert.That(stringRepresentation == "public sealed class Ntegrity.TestTargetAssembly.PublicSealedClass");
+			Assert.That(stringRepresentation.StartsWith("public sealed class Ntegrity.TestTargetAssembly.PublicSealedClass"));
 		}
 
 		[Test]
@@ -93,7 +93,7 @@ namespace Ntegrity.Test
 		{
 			var SUT = new TypeInterfaceData(typeof(PublicClass));
 			var stringRepresentation = SUT.ToString();
-			Assert.That(stringRepresentation == "public class Ntegrity.TestTargetAssembly.PublicClass");
+			Assert.That(stringRepresentation.StartsWith("public class Ntegrity.TestTargetAssembly.PublicClass"));
 		}
 
 		[Test]
@@ -102,7 +102,7 @@ namespace Ntegrity.Test
 			var type = typeof(PublicClass).Assembly.DefinedTypes.Single(x => x.Name == "InternalAbstractClass");
 			var SUT = new TypeInterfaceData(type);
 			var stringRepresentation = SUT.ToString();
-			Assert.That(stringRepresentation == "internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass");
+			Assert.That(stringRepresentation.StartsWith("internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass"));
 		}
 	}
 }

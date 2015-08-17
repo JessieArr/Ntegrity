@@ -44,7 +44,7 @@ namespace Ntegrity
 			returnString += "CLASSES: " + Environment.NewLine;
 			foreach (var classType in classes)
 			{
-				returnString += classType + Environment.NewLine;
+				returnString += classType.ToString("\t") + Environment.NewLine;
 			}
 			returnString += Environment.NewLine;
 
@@ -52,7 +52,7 @@ namespace Ntegrity
 			returnString += "INTERFACES: " + Environment.NewLine;
 			foreach (var interfaceType in interfaces)
 			{
-				returnString += interfaceType + Environment.NewLine;
+				returnString += interfaceType.ToString("\t") + Environment.NewLine;
 			}
 			returnString += Environment.NewLine;
 
@@ -60,7 +60,7 @@ namespace Ntegrity
 			returnString += "ENUMS: " + Environment.NewLine;
 			foreach (var enumType in enums)
 			{
-				returnString += enumType + Environment.NewLine;
+				returnString += enumType.ToString("\t") + Environment.NewLine;
 			}
 			returnString += Environment.NewLine;
 
@@ -68,7 +68,7 @@ namespace Ntegrity
 			returnString += "STRUCTS: " + Environment.NewLine;
 			foreach (var structType in structs)
 			{
-				returnString += structType + Environment.NewLine;
+				returnString += structType.ToString("\t") + Environment.NewLine;
 			}
 
 			return returnString;

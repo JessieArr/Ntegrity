@@ -10,7 +10,7 @@
 
 	public static class AccessLevelEnumHelpers
 	{
-		public static string GetKeywordFromEnum(AccessLevelEnum input)
+		public static string GetKeywordFromEnum(this AccessLevelEnum input)
 		{
 			switch (input)
 			{

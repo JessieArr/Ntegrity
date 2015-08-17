@@ -4,3 +4,7 @@ Ntegrity.Test/Ntegrity.Test.v2.ncrunchproject
 packages/*
 *.ncrunchsolution
 */obj/Debug/*
+*/bin/Debug/*
+*.suo
+*.crunchsolution.cache
+*.ncrunchsolution.user
