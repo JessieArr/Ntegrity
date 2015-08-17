@@ -3,8 +3,9 @@ Ntegrity.Test/Ntegrity.Test.v2.ncrunchproject
 *.ncrunchproject
 packages/*
 *.ncrunchsolution
-*/obj/Debug/*
-*/bin/Debug/*
+*/obj/*
+*/bin/*
 *.suo
 *.crunchsolution.cache
 *.ncrunchsolution.user
+*/_CreateNewNuGetPackage/*
