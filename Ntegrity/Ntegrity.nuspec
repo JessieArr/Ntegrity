@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Ntegrity</id>
+	<version>0.2.0.0</version>
+    <authors>Shawn Morrison</authors>
+    <description>A handy tool for managing the public interface of your .NET libraries.</description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/JessieArr/Ntegrity</projectUrl>
+  </metadata>
+</package>

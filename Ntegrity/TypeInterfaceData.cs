@@ -12,10 +12,14 @@ namespace Ntegrity
 		public readonly bool IsSealed;
 		public readonly bool IsAbstract;
 		public readonly bool IsStatic;
-		public readonly List<ConstructorData> ConstructorData = new List<ConstructorData>();
+		
 		public readonly List<AttributeData> AttributeData = new List<AttributeData>();
+        public readonly List<ConstructorData> ConstructorData = new List<ConstructorData>();
+        public readonly List<MethodData> MethodData = new List<MethodData>();
+        public readonly List<PropertyData> PropertyData = new List<PropertyData>();
+        public readonly List<FieldData> FieldData = new List<FieldData>();
 
-		public TypeInterfaceData(Type typeToAnalyze)
+        public TypeInterfaceData(Type typeToAnalyze)
 		{
 			Name = typeToAnalyze.FullName;
 
@@ -82,6 +86,9 @@ namespace Ntegrity
 
 			CollectAttributeData(typeToAnalyze);
 			CollectConstructorData(typeToAnalyze);
+            CollectMethodData(typeToAnalyze);
+            CollectPropertyData(typeToAnalyze);
+            CollectFieldData(typeToAnalyze);
 		}
 
 		private void CollectAttributeData(Type typeToAnalyze)
@@ -94,17 +101,47 @@ namespace Ntegrity
 			}
 		}
 
-		private void CollectConstructorData(Type typeToAnalyze)
-		{
-			var constructors = typeToAnalyze.GetConstructors();
+        private void CollectConstructorData(Type typeToAnalyze)
+        {
+            var constructors = typeToAnalyze.GetConstructors();
 
-			foreach (var constructor in constructors)
-			{
-				ConstructorData.Add(new ConstructorData(constructor));
-			}
-		}
+            foreach (var constructor in constructors)
+            {
+                ConstructorData.Add(new ConstructorData(constructor));
+            }
+        }
 
-		public override string ToString()
+        private void CollectMethodData(Type typeToAnalyze)
+        {
+            var methods = typeToAnalyze.GetMethods();
+
+            foreach (var method in methods)
+            {
+                MethodData.Add(new MethodData(method));
+            }
+        }
+
+        private void CollectPropertyData(Type typeToAnalyze)
+        {
+            var properties = typeToAnalyze.GetProperties();
+
+            foreach (var property in properties)
+            {
+                PropertyData.Add(new PropertyData(property));
+            }
+        }
+
+        private void CollectFieldData(Type typeToAnalyze)
+        {
+            var fields = typeToAnalyze.GetFields();
+
+            foreach (var field in fields)
+            {
+                FieldData.Add(new FieldData(field));
+            }
+        }
+
+        public override string ToString()
 		{
 			return ToString("");
 		}
@@ -150,7 +187,34 @@ namespace Ntegrity
                 }
             }
 
-			return returnString;
+            if (MethodData.Count > 0)
+            {
+                returnString += prefix + "METHODS:" + Environment.NewLine;
+                foreach (var method in MethodData)
+                {
+                    returnString += prefix + method.ToString(prefix) + Environment.NewLine;
+                }
+            }
+
+            if (PropertyData.Count > 0)
+            {
+                returnString += prefix + "PROPERTIES:" + Environment.NewLine;
+                foreach (var property in PropertyData)
+                {
+                    returnString += prefix + property.ToString(prefix) + Environment.NewLine;
+                }
+            }
+
+            if (FieldData.Count > 0)
+            {
+                returnString += prefix + "FIELDS:" + Environment.NewLine;
+                foreach (var field in FieldData)
+                {
+                    returnString += prefix + field.ToString(prefix) + Environment.NewLine;
+                }
+            }
+
+            return returnString;
 		}
 	}
 }

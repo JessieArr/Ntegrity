@@ -48,6 +48,9 @@
     <Compile Include="GitSourceControlHelper.cs" />
     <Compile Include="ISourceControlHelper.cs" />
     <Compile Include="MercurialSourceControlHelper.cs" />
+    <Compile Include="FieldData.cs" />
+    <Compile Include="PropertyData.cs" />
+    <Compile Include="MethodData.cs" />
     <Compile Include="Ntegrity.cs" />
     <Compile Include="NtegrityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="TypeInterfaceData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Ntegrity.nuspec" />
     <None Include="packages.config" />
     <None Include="_CreateNewNuGetPackage\Config.ps1" />
     <None Include="_CreateNewNuGetPackage\DoNotModify\CreateNuGetPackage.ps1" />

@@ -48,6 +48,7 @@
     <Compile Include="PublicClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicClassWithAttributes.cs" />
+    <Compile Include="PublicClassWithPropertiesAndFields.cs" />
     <Compile Include="PublicEnum.cs" />
     <Compile Include="PublicSealedClass.cs" />
     <Compile Include="PublicStruct.cs" />
