@@ -1,69 +1,8 @@
 # Ntegrity
 A library of tools for tracking and controlling changes to your .NET assembly's public interface!
 
-Sample output:
-```
-This is a human readable representation of the interface for the assembly:
-Assembly: Ntegrity.TestTargetAssembly
-Version:  v1.0.0.0
-Targeting CLR version: v4.0.30319
+Ntegrity allows you to generate a human-readable and text-diff'able representation of a .NET assembly's interface. This allows you to track changes to your interface in version control, and use historical diffs to create a full list of everything that has changed in your library since a given point in history.
 
-CLASSES: 
-	public class Ntegrity.TestTargetAssembly.ContainerClass
-	CONSTRUCTORS:
-		public Void .ctor()
+Future features will include: support for semantic diff'ing between two representations of an assembly to show added/changed/removed classes, properties etc. In addition, there will be support for detecting changes that violate SemVer best practices, and example unit tests/T4 templates that allow you to better enforce that your development environment takes advantage of Ntegrity!
 
-	internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass
-
-	internal class Ntegrity.TestTargetAssembly.InternalClass
-	CONSTRUCTORS:
-		public Void .ctor()
-
-	public class Ntegrity.TestTargetAssembly.PublicClass
-	CONSTRUCTORS:
-		public Void .ctor()
-
-	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
-	internal class Ntegrity.TestTargetAssembly.PublicClassWithAttributes
-	CONSTRUCTORS:
-		public Void .ctor()
-
-	public sealed class Ntegrity.TestTargetAssembly.PublicSealedClass
-	CONSTRUCTORS:
-		public Void .ctor()
-
-	public static class Ntegrity.TestTargetAssembly.StaticClass
-
-	[System.AttributeUsageAttribute]
-	public class Ntegrity.TestTargetAssembly.TestAttributeAttribute
-	CONSTRUCTORS:
-		public Void .ctor(System.String)
-
-	private class Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateClass
-	CONSTRUCTORS:
-		public Void .ctor()
-
-	protected class Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedClass
-	CONSTRUCTORS:
-		public Void .ctor()
-
-
-INTERFACES: 
-	public interface Ntegrity.TestTargetAssembly.IPublicInterface
-
-
-ENUMS: 
-	public enum Ntegrity.TestTargetAssembly.PublicEnum
-
-	private enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateEnum
-
-	protected enum Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedEnum
-
-
-STRUCTS: 
-	public struct Ntegrity.TestTargetAssembly.PublicStruct
-
-	private struct Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateStruct
-
-	protected struct Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedStruct
-```
+Curious? You can check out some sample output from the tool [here!](https://github.com/JessieArr/Ntegrity/blob/master/Ntegrity.Test/SampleOutput/TestTargetAssembly.Interface.txt)
