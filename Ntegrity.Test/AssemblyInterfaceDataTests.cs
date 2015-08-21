@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,14 @@ namespace Ntegrity.Test
 			
 		}
 
+        [Explicit]
 		[Test]
 		public void BuildAssemblyInterfaceData_ForTargetAssembly()
 		{
 			var SUT = new AssemblyInterfaceData(typeof(PublicClass));
 
 			var readable = SUT.GenerateHumanReadableInterfaceDefinition();
+            File.WriteAllText("../../SampleOutput/TestTargetAssembly.Interface.txt", readable);
 		}
 	}
 }

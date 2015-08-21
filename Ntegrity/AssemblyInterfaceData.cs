@@ -11,6 +11,7 @@ namespace Ntegrity
 	{
 		public readonly List<TypeInterfaceData> Types = new List<TypeInterfaceData>();
 		public readonly Assembly Assembly;
+	    public readonly List<string> ReferencedAssemblies; 
 		public readonly string Name;
 		public readonly string Version;
 		public readonly string CLRVersion;
@@ -23,7 +24,9 @@ namespace Ntegrity
 			Version = "v" + Assembly.GetName().Version;
 			CLRVersion = Assembly.ImageRuntimeVersion;
 
-			var types = Assembly.GetTypes();
+		    ReferencedAssemblies = Assembly.GetReferencedAssemblies().Select(x => x.FullName).ToList();
+
+            var types = Assembly.GetTypes();
 
 			foreach (var type in types)
 			{
@@ -39,7 +42,14 @@ namespace Ntegrity
 			returnString += "Version:  " + Version + Environment.NewLine;
             returnString += "Targeting CLR version: " + CLRVersion + Environment.NewLine + Environment.NewLine;
 
-			var classes = Types.Where(x => x.Type == TypeEnum.Class);
+		    returnString += "Referenced Assemblies:" + Environment.NewLine;
+            foreach (var assembly in ReferencedAssemblies)
+            {
+                returnString += assembly + Environment.NewLine;
+            }
+		    returnString += Environment.NewLine;
+
+            var classes = Types.Where(x => x.Type == TypeEnum.Class);
 
 			returnString += "CLASSES: " + Environment.NewLine;
 			foreach (var classType in classes)

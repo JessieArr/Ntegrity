@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 
@@ -96,13 +97,61 @@ namespace Ntegrity.Test
 			Assert.That(stringRepresentation.StartsWith("public class Ntegrity.TestTargetAssembly.PublicClass"));
 		}
 
-		[Test]
-		public void ToString_BuildsCorrectString_ForInternalAbstractClass()
-		{
-			var type = typeof(PublicClass).Assembly.DefinedTypes.Single(x => x.Name == "InternalAbstractClass");
-			var SUT = new TypeInterfaceData(type);
-			var stringRepresentation = SUT.ToString();
-			Assert.That(stringRepresentation.StartsWith("internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass"));
-		}
-	}
+        [Test]
+        public void ToString_BuildsCorrectString_ForInternalAbstractClass()
+        {
+            var type = typeof(PublicClass).Assembly.DefinedTypes.Single(x => x.Name == "InternalAbstractClass");
+            var SUT = new TypeInterfaceData(type);
+            var stringRepresentation = SUT.ToString();
+            Assert.That(stringRepresentation.StartsWith("internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass"));
+        }
+
+        [Test]
+        public void NoInheritance_InheritsFrom_IsNull()
+        {
+            var type = typeof(PublicBaseClass);
+            var SUT = new TypeInterfaceData(type);
+            Assert.That(String.IsNullOrEmpty(SUT.InheritsFrom));
+        }
+
+        [Test]
+        public void NoInterfaces_ImplementsInterfaces_IsEmpty()
+        {
+            var type = typeof(PublicBaseClass);
+            var SUT = new TypeInterfaceData(type);
+            Assert.That(SUT.ImplementsInterfaces.Count == 0);
+        }
+
+        [Test]
+        public void Interface_ImplementsInterface_IsNotEmpty()
+        {
+            var type = typeof(IPublicChildInterface);
+            var SUT = new TypeInterfaceData(type);
+            Assert.That(SUT.ImplementsInterfaces.Count == 1);
+            Assert.That(SUT.ImplementsInterfaces.Any(
+                x => String.Equals(x, "Ntegrity.TestTargetAssembly.IPublicInterface")));
+        }
+
+        [Test]
+        public void ChildClass_Inherits_BaseClass()
+        {
+            var type = typeof(PublicChildClass);
+            var SUT = new TypeInterfaceData(type);
+            Assert.That(SUT.InheritsFrom == "Ntegrity.TestTargetAssembly.PublicBaseClass");
+        }
+
+        [Test]
+        public void ChildClass_Implements_Interfaces()
+        {
+            var type = typeof(PublicChildClass);
+            var SUT = new TypeInterfaceData(type);
+            Assert.That(SUT.ImplementsInterfaces.Count == 2);
+            Assert.That(SUT.ImplementsInterfaces.Any(
+                x => String.Equals(x, "Ntegrity.TestTargetAssembly.IPublicInterface",
+                StringComparison.OrdinalIgnoreCase)));
+            Assert.That(SUT.ImplementsInterfaces.Any(
+                x => String.Equals(x, "Ntegrity.TestTargetAssembly.IInternalInterface",
+                StringComparison.OrdinalIgnoreCase)));
+        }
+    }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Lifetime;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Ntegrity
 {
@@ -18,6 +21,8 @@ namespace Ntegrity
         public readonly List<MethodData> MethodData = new List<MethodData>();
         public readonly List<PropertyData> PropertyData = new List<PropertyData>();
         public readonly List<FieldData> FieldData = new List<FieldData>();
+        public readonly string InheritsFrom;
+        public readonly List<string> ImplementsInterfaces;
 
         public TypeInterfaceData(Type typeToAnalyze)
 		{
@@ -89,7 +94,17 @@ namespace Ntegrity
             CollectMethodData(typeToAnalyze);
             CollectPropertyData(typeToAnalyze);
             CollectFieldData(typeToAnalyze);
-		}
+
+            if (typeToAnalyze.BaseType != null 
+                && typeToAnalyze.BaseType.FullName != "System.Object"
+                && typeToAnalyze.BaseType.FullName != "System.ValueType"
+                && typeToAnalyze.BaseType.FullName != "System.Enum")
+            {
+                InheritsFrom = typeToAnalyze.BaseType.FullName;
+            }
+            
+            ImplementsInterfaces = typeToAnalyze.GetInterfaces().Select(x => x.FullName).ToList();
+        }
 
 		private void CollectAttributeData(Type typeToAnalyze)
 		{
@@ -117,6 +132,11 @@ namespace Ntegrity
 
             foreach (var method in methods)
             {
+                if (method.IsSpecialName ||
+                    method.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any())
+                {
+                    continue;
+                }
                 MethodData.Add(new MethodData(method));
             }
         }
@@ -137,6 +157,11 @@ namespace Ntegrity
 
             foreach (var field in fields)
             {
+                if (field.IsSpecialName ||
+                    field.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any())
+                {
+                    continue;
+                }
                 FieldData.Add(new FieldData(field));
             }
         }
@@ -178,7 +203,22 @@ namespace Ntegrity
 			returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
 			returnString += Name + Environment.NewLine;
 
-		    if (ConstructorData.Count > 0)
+		    if (!String.IsNullOrEmpty(InheritsFrom))
+		    {
+                returnString += prefix + "INHERITS:" + Environment.NewLine;
+                returnString += prefix + InheritsFrom + Environment.NewLine;
+            }
+
+            if (ImplementsInterfaces.Count > 0)
+            {
+                returnString += prefix + "IMPLEMENTS:" + Environment.NewLine;
+                foreach (var interfaceName in ImplementsInterfaces)
+                {
+                    returnString += prefix + interfaceName + Environment.NewLine;
+                }
+            }
+
+            if (ConstructorData.Count > 0)
 		    {
                 returnString += prefix + "CONSTRUCTORS:" + Environment.NewLine;
                 foreach (var constructor in ConstructorData)
