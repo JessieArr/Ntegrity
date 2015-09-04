@@ -52,5 +52,19 @@ namespace Ntegrity.Test
             Assert.That(readable.IndexOf("private") == -1);
             Assert.That(readable.IndexOf("protected") == -1);
         }
+
+        [Test]
+        public void BuildAssemblyInterfaceData_ExcludePublic_ReturnsNoPrivateFields()
+        {
+            var SUT = new AssemblyInterfaceData(typeof(PublicClass));
+
+            var readable = SUT.GenerateHumanReadableInterfaceDefinition(new NtegrityOutputSettings()
+            {
+                ShowTypesAtOrAboveAccessLevel = AccessLevelEnum.Public
+            });
+            Assert.That(readable.IndexOf("private") == -1);
+            Assert.That(readable.IndexOf("protected") == -1);
+            Assert.That(readable.IndexOf("internal") == -1);
+        }
     }
 }

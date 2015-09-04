@@ -218,7 +218,7 @@ namespace Ntegrity
             if (!String.IsNullOrEmpty(InheritsFrom))
             {
                 returnString += prefix + "INHERITS:" + Environment.NewLine;
-                returnString += prefix + InheritsFrom + Environment.NewLine;
+                returnString += prefix + prefix + InheritsFrom + Environment.NewLine;
             }
 
             if (ImplementsInterfaces.Count > 0)
@@ -226,7 +226,7 @@ namespace Ntegrity
                 returnString += prefix + "IMPLEMENTS:" + Environment.NewLine;
                 foreach (var interfaceName in ImplementsInterfaces)
                 {
-                    returnString += prefix + interfaceName + Environment.NewLine;
+                    returnString += prefix + prefix + interfaceName + Environment.NewLine;
                 }
             }
 

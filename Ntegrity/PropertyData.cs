@@ -90,7 +90,7 @@ namespace Ntegrity
             {
                 accessorString += SetterAccessLevel.GetKeywordFromEnum() + " set; ";
             }
-            accessorString += " }";
+            accessorString += "}";
 
             return prefix + PropertySignature + " " + accessorString;
         }
