@@ -64,7 +64,7 @@ namespace Ntegrity
                 {
                     continue;
                 }
-                returnString += classType.ToString("\t") + Environment.NewLine;
+                returnString += classType.ToString(settings.SpacingString) + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -77,7 +77,7 @@ namespace Ntegrity
                 {
                     continue;
                 }
-                returnString += interfaceType.ToString("\t") + Environment.NewLine;
+                returnString += interfaceType.ToString(settings.SpacingString) + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -90,7 +90,7 @@ namespace Ntegrity
                 {
                     continue;
                 }
-                returnString += enumType.ToString("\t") + Environment.NewLine;
+                returnString += enumType.ToString(settings.SpacingString) + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -103,20 +103,10 @@ namespace Ntegrity
                 {
                     continue;
                 }
-                returnString += structType.ToString("\t") + Environment.NewLine;
+                returnString += structType.ToString(settings.SpacingString) + Environment.NewLine;
             }
 
             return returnString;
-        }
-    }
-
-    public class NtegrityOutputSettings
-    {
-        public AccessLevelEnum ShowTypesAtOrAboveAccessLevel { get; set; }
-
-        public NtegrityOutputSettings()
-        {
-            ShowTypesAtOrAboveAccessLevel = AccessLevelEnum.Private;
         }
     }
 }
