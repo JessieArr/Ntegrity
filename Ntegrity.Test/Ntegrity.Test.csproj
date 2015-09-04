@@ -81,15 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Ntegrity.TestTargetAssembly.tt</DependentUpon>
     </Content>
-    <Content Include="Test.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Test.txt</LastGenOutput>
-    </Content>
-    <Content Include="Test.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Test.tt</DependentUpon>
-    </Content>
     <None Include="SampleT4Templates\Ntegrity.TestTargetAssembly.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Ntegrity.TestTargetAssembly.Interface.txt</LastGenOutput>
@@ -118,12 +109,10 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
   <!--<Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>-->
-
   <!-- The below PropertyGroup and Target cause T4 templates to run on build. -->
   <PropertyGroup>
     <!-- Initial default value -->
