@@ -1,0 +1,17 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Ntegrity" #>
+<#@ import namespace="Ntegrity.TestTargetAssembly" #>
+<#@ output extension="Interface.txt" #>
+<#@ assembly name="bin\Debug\Ntegrity.dll" #>
+<#@ assembly name="bin\Debug\Ntegrity.TestTargetAssembly.dll" #>
+<#
+	// This works on save/run custom tool.
+	Write(new AssemblyInterfaceData(typeof(PublicClass)).GenerateHumanReadableInterfaceDefinition());
+	var x = "Test";
+#>
+

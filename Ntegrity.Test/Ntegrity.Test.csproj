@@ -76,18 +76,28 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HelloWorld.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HelloWorld.txt</LastGenOutput>
-    </Content>
-    <Content Include="HelloWorld.txt">
+    <Content Include="SampleT4Templates\Ntegrity.TestTargetAssembly.Interface.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HelloWorld.tt</DependentUpon>
+      <DependentUpon>Ntegrity.TestTargetAssembly.tt</DependentUpon>
     </Content>
+    <Content Include="Test.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Test.txt</LastGenOutput>
+    </Content>
+    <Content Include="Test.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.tt</DependentUpon>
+    </Content>
+    <None Include="SampleT4Templates\Ntegrity.TestTargetAssembly.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ntegrity.TestTargetAssembly.Interface.txt</LastGenOutput>
+    </None>
     <Content Include="SampleOutput\TestTargetAssembly.Interface.txt" />
     <Content Include="SampleOutput\TestTargetAssembly_NoPriviates.Interface.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -108,11 +118,23 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  
+  <!--<Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
+  </Target>-->
+
+  <!-- The below PropertyGroup and Target cause T4 templates to run on build. -->
+  <PropertyGroup>
+    <!-- Initial default value -->
+    <_TransformExe>$(CommonProgramFiles)\Microsoft Shared\TextTemplating\14.0\TextTransform.exe</_TransformExe>
+  </PropertyGroup>
+  <Target Name="TransformOnBuild" AfterTargets="AfterBuild">
+    <Error Text="Failed to find TextTransform.exe tool at '$(_TransformExe)." Condition="!Exists('$(_TransformExe)')" />
+    <ItemGroup>
+      <_TextTransform Include="@(None)" Condition="'%(None.Generator)' == 'TextTemplatingFilePreprocessor' Or '%(None.Generator)' == 'TextTemplatingFileGenerator'" />
+    </ItemGroup>
+    <!-- Perform task batching for each file -->
+    <Exec Command="&quot;$(_TransformExe)&quot; &quot;@(_TextTransform)&quot;" Condition="'%(Identity)' != ''" />
   </Target>
-  -->
 </Project>
