@@ -17,6 +17,8 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,8 +72,19 @@
       <Name>TestTargetAssembly</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HelloWorld.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelloWorld.txt</LastGenOutput>
+    </Content>
+    <Content Include="HelloWorld.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelloWorld.tt</DependentUpon>
+    </Content>
     <Content Include="SampleOutput\TestTargetAssembly.Interface.txt" />
     <Content Include="SampleOutput\TestTargetAssembly_NoPriviates.Interface.txt" />
   </ItemGroup>

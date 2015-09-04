@@ -77,7 +77,7 @@ namespace Ntegrity.TestTargetAssembly
         #region Nested Public
         public class NestedPublicClass
         {
-
+            public string test;
         }
 
         public interface INestedPublicInterface

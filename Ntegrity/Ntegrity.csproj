@@ -49,6 +49,7 @@
     <Compile Include="ISourceControlHelper.cs" />
     <Compile Include="MercurialSourceControlHelper.cs" />
     <Compile Include="FieldData.cs" />
+    <Compile Include="NtegrityOutputSettings.cs" />
     <Compile Include="PropertyData.cs" />
     <Compile Include="MethodData.cs" />
     <Compile Include="Ntegrity.cs" />

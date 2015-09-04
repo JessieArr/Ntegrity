@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInternalinterface.cs" />
+    <Compile Include="InternalEnum.cs" />
+    <Compile Include="InternalStruct.cs" />
     <Compile Include="IPublicChildInterface.cs" />
     <Compile Include="PublicBaseClass.cs" />
     <Compile Include="ContainerClass.cs" />

@@ -1,0 +1,174 @@
+﻿This is a human readable representation of the interface for the assembly:
+Assembly: Ntegrity.TestTargetAssembly
+Version:  v1.0.0.0
+Targeting CLR version: v4.0.30319
+
+Referenced Assemblies:
+mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+
+CLASSES: 
+	public class Ntegrity.TestTargetAssembly.PublicBaseClass
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.ContainerClass
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.PublicChildClass
+	INHERITS:
+	Ntegrity.TestTargetAssembly.PublicBaseClass
+	IMPLEMENTS:
+	Ntegrity.TestTargetAssembly.IPublicInterface
+	Ntegrity.TestTargetAssembly.IInternalInterface
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.PublicClass
+	IMPLEMENTS:
+	Ntegrity.TestTargetAssembly.IPublicInterface
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.PublicClassWithPropertiesAndFields
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+	PROPERTIES:
+		Int32 IntProperty { public get; public set;  }
+	FIELDS:
+		public Int32 IntField
+
+	public sealed class Ntegrity.TestTargetAssembly.PublicSealedClass
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	public static class Ntegrity.TestTargetAssembly.StaticClass
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+
+	[System.AttributeUsageAttribute]
+	public class Ntegrity.TestTargetAssembly.TestAttributeAttribute
+	INHERITS:
+	System.Attribute
+	IMPLEMENTS:
+	System.Runtime.InteropServices._Attribute
+	CONSTRUCTORS:
+		public Void .ctor(System.String)
+	METHODS:
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public Boolean Match(System.Object)
+		public Boolean IsDefaultAttribute()
+		public System.String ToString()
+		public System.Type GetType()
+	PROPERTIES:
+		System.Object TypeId { public get;  }
+	FIELDS:
+		public System.String Text
+
+	public class Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicClass
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.Type GetType()
+	FIELDS:
+		public System.String test
+
+
+INTERFACES: 
+	public interface Ntegrity.TestTargetAssembly.IPublicChildInterface
+	IMPLEMENTS:
+	Ntegrity.TestTargetAssembly.IPublicInterface
+
+	public interface Ntegrity.TestTargetAssembly.IPublicInterface
+
+	public interface Ntegrity.TestTargetAssembly.ContainerClass+INestedPublicInterface
+
+
+ENUMS: 
+	public enum Ntegrity.TestTargetAssembly.PublicEnum
+	IMPLEMENTS:
+	System.IComparable
+	System.IFormattable
+	System.IConvertible
+	METHODS:
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.String ToString()
+		public System.String ToString(System.String, System.IFormatProvider)
+		public Int32 CompareTo(System.Object)
+		public System.String ToString(System.String)
+		public System.String ToString(System.IFormatProvider)
+		public Boolean HasFlag(System.Enum)
+		public System.TypeCode GetTypeCode()
+		public System.Type GetType()
+
+	public enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicEnum
+	IMPLEMENTS:
+	System.IComparable
+	System.IFormattable
+	System.IConvertible
+	METHODS:
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.String ToString()
+		public System.String ToString(System.String, System.IFormatProvider)
+		public Int32 CompareTo(System.Object)
+		public System.String ToString(System.String)
+		public System.String ToString(System.IFormatProvider)
+		public Boolean HasFlag(System.Enum)
+		public System.TypeCode GetTypeCode()
+		public System.Type GetType()
+
+
+STRUCTS: 
+	public struct Ntegrity.TestTargetAssembly.PublicStruct
+	METHODS:
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.String ToString()
+		public System.Type GetType()
+
+	public struct Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicStruct
+	METHODS:
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		public System.String ToString()
+		public System.Type GetType()
+
