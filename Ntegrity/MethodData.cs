@@ -43,7 +43,20 @@ namespace Ntegrity
 
         public string ToString(string prefix)
         {
-            return prefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
+            return ToString(prefix, new NtegrityOutputSettings());
+        }
+
+        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        {
+            var returnString = "";
+            if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                outputSettings.ShowTypesAtOrAboveAccessLevel))
+            {
+                return returnString;
+            }
+
+            returnString += prefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
+            return returnString;
         }
     }
 }

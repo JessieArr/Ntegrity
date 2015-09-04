@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ntegrity.TestTargetAssembly
 {
-    public class PublicChildClass : PublicBaseClass, IPublicInterface, IInternalInterface
+    internal enum InternalEnum
     {
     }
 }

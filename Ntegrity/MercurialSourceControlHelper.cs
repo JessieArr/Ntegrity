@@ -12,7 +12,8 @@ namespace Ntegrity
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.FileName = "hg";
 			p.StartInfo.Arguments = "branch";
-			p.Start();
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
 
 			string output = p.StandardOutput.ReadToEnd();
 			p.WaitForExit();

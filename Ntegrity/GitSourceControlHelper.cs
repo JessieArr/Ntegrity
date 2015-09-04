@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 
 namespace Ntegrity
 {
@@ -11,8 +12,9 @@ namespace Ntegrity
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.FileName = "git";
-			p.StartInfo.Arguments = "branch";
-			p.Start();
+            p.StartInfo.Arguments = "branch";
+		    p.StartInfo.CreateNoWindow = true;
+		    p.Start();
 
 			string output = p.StandardOutput.ReadToEnd();
 			p.WaitForExit();

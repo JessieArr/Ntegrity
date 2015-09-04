@@ -45,5 +45,15 @@ namespace Ntegrity
         {
             return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
         }
+
+        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        {
+            if(AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                outputSettings.ShowTypesAtOrAboveAccessLevel))
+            {
+                return "";
+            }
+            return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
+        }
     }
 }

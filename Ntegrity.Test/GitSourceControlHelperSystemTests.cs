@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 
 namespace Ntegrity.Test
 {
@@ -15,7 +16,8 @@ namespace Ntegrity.Test
 		[Test]
 		public void GetBranch_ReturnsMaster()
 		{
-			var branch = _SUT.GetCurrentBranch();
+            var x = Directory.GetCurrentDirectory();
+            var branch = _SUT.GetCurrentBranch();
 			Assert.That(branch.StartsWith("* master"));
 		}
 	}

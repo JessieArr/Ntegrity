@@ -73,6 +73,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="SampleOutput\TestTargetAssembly.Interface.txt" />
+    <Content Include="SampleOutput\TestTargetAssembly_NoPriviates.Interface.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

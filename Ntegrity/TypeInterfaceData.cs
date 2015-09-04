@@ -59,17 +59,18 @@ namespace Ntegrity
 			}
 
 			var foundAccessLevel = false;
-			if (typeToAnalyze.IsNestedPrivate)
-			{
-				AccessLevel = AccessLevelEnum.Private;
-				foundAccessLevel = true;
-			}
-			if (!typeToAnalyze.IsVisible && typeToAnalyze.IsNotPublic)
+            if (typeToAnalyze.IsNestedPrivate)
+            {
+                AccessLevel = AccessLevelEnum.Private;
+                foundAccessLevel = true;
+            }
+            if (!typeToAnalyze.IsVisible && typeToAnalyze.IsNotPublic 
+                || typeToAnalyze.IsNestedAssembly)
 			{
 				AccessLevel = AccessLevelEnum.Internal;
 				foundAccessLevel = true;
 			}
-			if (typeToAnalyze.IsPublic)
+			if (typeToAnalyze.IsPublic || typeToAnalyze.IsNestedPublic)
 			{
 				AccessLevel = AccessLevelEnum.Public;
 				foundAccessLevel = true;
@@ -171,40 +172,51 @@ namespace Ntegrity
 			return ToString("");
 		}
 
-		public string ToString(string prefix)
-		{
-			var returnString = "";
+        public string ToString(string prefix)
+        {
+            return ToString(prefix, new NtegrityOutputSettings());
+        }
 
-			foreach (var attribute in AttributeData)
-			{
-				returnString += prefix + attribute + Environment.NewLine;
-			}
-			returnString += prefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
+        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        {
+            var returnString = "";
 
-			if (Type == TypeEnum.Class)
-			{
-				if (IsStatic)
-				{
-					returnString += "static ";
-				}
-				else
-				{
-					if (IsAbstract)
-					{
-						returnString += "abstract ";
-					}
-					if (IsSealed)
-					{
-						returnString += "sealed ";
-					}
-				}
-			}
-			
-			returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
-			returnString += Name + Environment.NewLine;
+            if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                outputSettings.ShowTypesAtOrAboveAccessLevel))
+            {
+                return returnString;
+            }
 
-		    if (!String.IsNullOrEmpty(InheritsFrom))
-		    {
+            foreach (var attribute in AttributeData)
+            {
+                returnString += prefix + attribute + Environment.NewLine;
+            }
+            returnString += prefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
+
+            if (Type == TypeEnum.Class)
+            {
+                if (IsStatic)
+                {
+                    returnString += "static ";
+                }
+                else
+                {
+                    if (IsAbstract)
+                    {
+                        returnString += "abstract ";
+                    }
+                    if (IsSealed)
+                    {
+                        returnString += "sealed ";
+                    }
+                }
+            }
+
+            returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
+            returnString += Name + Environment.NewLine;
+
+            if (!String.IsNullOrEmpty(InheritsFrom))
+            {
                 returnString += prefix + "INHERITS:" + Environment.NewLine;
                 returnString += prefix + InheritsFrom + Environment.NewLine;
             }
@@ -219,10 +231,15 @@ namespace Ntegrity
             }
 
             if (ConstructorData.Count > 0)
-		    {
+            {
                 returnString += prefix + "CONSTRUCTORS:" + Environment.NewLine;
                 foreach (var constructor in ConstructorData)
                 {
+                    if (!constructor.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))
+                    {
+                        continue;
+                    }
                     returnString += prefix + constructor.ToString(prefix) + Environment.NewLine;
                 }
             }
@@ -232,6 +249,11 @@ namespace Ntegrity
                 returnString += prefix + "METHODS:" + Environment.NewLine;
                 foreach (var method in MethodData)
                 {
+                    if (!method.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))
+                    {
+                        continue;
+                    }
                     returnString += prefix + method.ToString(prefix) + Environment.NewLine;
                 }
             }
@@ -241,7 +263,14 @@ namespace Ntegrity
                 returnString += prefix + "PROPERTIES:" + Environment.NewLine;
                 foreach (var property in PropertyData)
                 {
-                    returnString += prefix + property.ToString(prefix) + Environment.NewLine;
+                    if (!(property.GetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel)
+                    || property.SetterAccessLevel.HasAvailabilityEqualToOrGreaterThan((
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))))
+                    {
+                        continue;
+                    }
+                    returnString += prefix + property.ToString(prefix, outputSettings) + Environment.NewLine;
                 }
             }
 
@@ -250,11 +279,16 @@ namespace Ntegrity
                 returnString += prefix + "FIELDS:" + Environment.NewLine;
                 foreach (var field in FieldData)
                 {
+                    if (!field.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))
+                    {
+                        continue;
+                    }
                     returnString += prefix + field.ToString(prefix) + Environment.NewLine;
                 }
             }
 
             return returnString;
-		}
-	}
+        }
+    }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ntegrity.TestTargetAssembly
 {
-    internal interface IInternalinterface
+    internal interface IInternalInterface
     {
     }
 }

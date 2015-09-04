@@ -25,5 +25,39 @@
 			}
 			throw new NtegrityException("Unable to determine keyword for AccessLevelEnum");
 		}
+
+	    public static bool HasAvailabilityEqualToOrGreaterThan(this AccessLevelEnum compared, AccessLevelEnum comparedTo)
+	    {
+	        if (comparedTo == AccessLevelEnum.Private)
+	        {
+	            return true;
+	        }
+	        if (comparedTo == AccessLevelEnum.Protected)
+	        {
+	            if (compared == AccessLevelEnum.Public
+	                || compared == AccessLevelEnum.Internal
+	                || compared == AccessLevelEnum.Protected)
+	            {
+	                return true;
+	            }
+	        }
+            if (comparedTo == AccessLevelEnum.Internal)
+            {
+                if (compared == AccessLevelEnum.Public
+                    || compared == AccessLevelEnum.Internal)
+                {
+                    return true;
+                }
+            }
+            if (comparedTo == AccessLevelEnum.Public)
+            {
+                if (compared == AccessLevelEnum.Public)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+	    }
 	}
 }

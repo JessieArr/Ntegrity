@@ -74,12 +74,19 @@ namespace Ntegrity
 
         public string ToString(string prefix)
         {
+            return ToString(prefix, new NtegrityOutputSettings());
+        }
+
+        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        {
             var accessorString = "{ ";
-            if (HasGetter)
+            if (HasGetter && GetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))
             {
                 accessorString += GetterAccessLevel.GetKeywordFromEnum() + " get; ";
             }
-            if (HasSetter)
+            if (HasSetter && SetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                    outputSettings.ShowTypesAtOrAboveAccessLevel))
             {
                 accessorString += SetterAccessLevel.GetKeywordFromEnum() + " set; ";
             }
