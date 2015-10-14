@@ -92,7 +92,7 @@ namespace Ntegrity.Models
                 {
                     continue;
                 }
-                returnString += classType.ToString(settings.SpacingString) + Environment.NewLine;
+                returnString += classType.ToString() + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -105,7 +105,7 @@ namespace Ntegrity.Models
                 {
                     continue;
                 }
-                returnString += interfaceType.ToString(settings.SpacingString) + Environment.NewLine;
+                returnString += interfaceType.ToString() + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -118,7 +118,7 @@ namespace Ntegrity.Models
                 {
                     continue;
                 }
-                returnString += enumType.ToString(settings.SpacingString) + Environment.NewLine;
+                returnString += enumType.ToString() + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -131,7 +131,7 @@ namespace Ntegrity.Models
                 {
                     continue;
                 }
-                returnString += structType.ToString(settings.SpacingString) + Environment.NewLine;
+                returnString += structType.ToString() + Environment.NewLine;
             }
 
             return returnString;

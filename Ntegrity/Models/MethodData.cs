@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ntegrity.Models
@@ -41,17 +42,12 @@ namespace Ntegrity.Models
             MethodSignature = methodInfo;
         }
 
-        public override string ToString()
+        public string ToString()
         {
-            return ToString("");
+            return ToString(new NtegrityOutputSettings());
         }
 
-        public string ToString(string prefix)
-        {
-            return ToString(prefix, new NtegrityOutputSettings());
-        }
-
-        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        public string ToString(NtegrityOutputSettings outputSettings)
         {
             var returnString = "";
             if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
@@ -60,7 +56,23 @@ namespace Ntegrity.Models
                 return returnString;
             }
 
-            returnString += prefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
+            if (AttributeData.Count > 0)
+            {
+                foreach (var attribute in AttributeData)
+                {
+                    if (!outputSettings.ShowCompilerAttributes)
+                    {
+                        if (attribute.IsCompilerGenerated)
+                        {
+                            continue;
+                        }
+                    }
+
+                    returnString += outputSettings.MemberPrefix + "[" + attribute.Name + "]" + Environment.NewLine;
+                }
+            }
+
+            returnString += outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
             return returnString;
         }
     }

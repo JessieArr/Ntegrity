@@ -165,17 +165,12 @@ namespace Ntegrity.Models
             }
         }
 
-        public override string ToString()
-		{
-			return ToString("");
-		}
-
-        public string ToString(string prefix)
+        public string ToString()
         {
-            return ToString(prefix, new NtegrityOutputSettings());
+            return ToString(new NtegrityOutputSettings());
         }
 
-        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        public string ToString(NtegrityOutputSettings outputSettings)
         {
             var returnString = "";
 
@@ -187,9 +182,9 @@ namespace Ntegrity.Models
 
             foreach (var attribute in AttributeData)
             {
-                returnString += prefix + attribute + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + attribute + Environment.NewLine;
             }
-            returnString += prefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
+            returnString += outputSettings.TypePrefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
 
             if (Type == TypeEnum.Class)
             {
@@ -215,22 +210,22 @@ namespace Ntegrity.Models
 
             if (!String.IsNullOrEmpty(InheritsFrom))
             {
-                returnString += prefix + "INHERITS:" + Environment.NewLine;
-                returnString += prefix + prefix + InheritsFrom + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "INHERITS:" + Environment.NewLine;
+                returnString += outputSettings.MemberPrefix + InheritsFrom + Environment.NewLine;
             }
 
             if (ImplementsInterfaces.Count > 0)
             {
-                returnString += prefix + "IMPLEMENTS:" + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "IMPLEMENTS:" + Environment.NewLine;
                 foreach (var interfaceName in ImplementsInterfaces)
                 {
-                    returnString += prefix + prefix + interfaceName + Environment.NewLine;
+                    returnString += outputSettings.MemberPrefix + interfaceName + Environment.NewLine;
                 }
             }
 
             if (ConstructorData.Count > 0)
             {
-                returnString += prefix + "CONSTRUCTORS:" + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "CONSTRUCTORS:" + Environment.NewLine;
                 foreach (var constructor in ConstructorData)
                 {
                     if (!constructor.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
@@ -238,13 +233,13 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += prefix + constructor.ToString(prefix) + Environment.NewLine;
+                    returnString += outputSettings.TypePrefix + constructor.ToString(outputSettings.TypePrefix) + Environment.NewLine;
                 }
             }
 
             if (MethodData.Count > 0)
             {
-                returnString += prefix + "METHODS:" + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "METHODS:" + Environment.NewLine;
                 foreach (var method in MethodData)
                 {
                     if (!method.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
@@ -252,13 +247,13 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += prefix + method.ToString(prefix) + Environment.NewLine;
+                    returnString += method.ToString() + Environment.NewLine;
                 }
             }
 
             if (PropertyData.Count > 0)
             {
-                returnString += prefix + "PROPERTIES:" + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "PROPERTIES:" + Environment.NewLine;
                 foreach (var property in PropertyData)
                 {
                     if (!(property.GetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
@@ -268,13 +263,13 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += prefix + property.ToString(prefix, outputSettings) + Environment.NewLine;
+                    returnString += outputSettings.TypePrefix + property.ToString(outputSettings.TypePrefix, outputSettings) + Environment.NewLine;
                 }
             }
 
             if (FieldData.Count > 0)
             {
-                returnString += prefix + "FIELDS:" + Environment.NewLine;
+                returnString += outputSettings.TypePrefix + "FIELDS:" + Environment.NewLine;
                 foreach (var field in FieldData)
                 {
                     if (!field.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
@@ -282,7 +277,7 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += prefix + field.ToString(prefix) + Environment.NewLine;
+                    returnString += outputSettings.TypePrefix + field.ToString(outputSettings.TypePrefix) + Environment.NewLine;
                 }
             }
 

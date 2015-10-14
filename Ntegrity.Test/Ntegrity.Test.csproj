@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInterfaceDataTests.cs" />
     <Compile Include="GitSourceControlHelperSystemTests.cs" />
+    <Compile Include="MethodDataTests.cs" />
     <Compile Include="NtegrityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeInterfaceDataTests.cs" />
@@ -86,7 +87,7 @@
       <LastGenOutput>Ntegrity.TestTargetAssembly.Interface.txt</LastGenOutput>
     </None>
     <Content Include="SampleOutput\TestTargetAssembly.Interface.txt" />
-    <Content Include="SampleOutput\TestTargetAssembly_NoPriviates.Interface.txt" />
+    <Content Include="SampleOutput\TestTargetAssembly_NoPrivates.Interface.txt" />
   </ItemGroup>
   <ItemGroup />
   <Choose>

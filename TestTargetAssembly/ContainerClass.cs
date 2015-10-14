@@ -95,5 +95,26 @@ namespace Ntegrity.TestTargetAssembly
 
         }
         #endregion
+
+        #region Members With Attributes
+
+        [TestAttribute("Sample Attribute Text")]
+        public void PublicMethodWithAttributes()
+        {
+        }
+
+        [TestAttribute("Sample Attribute Text")]
+        public int PublicPropertyWithAttributes { get; set; }
+
+        [TestAttribute("Sample Attribute Text")]
+        public int PublicFieldWithAttributes;
+
+        // PublicConstructorWithAttributes
+        [TestAttribute("Sample Attribute Text")]
+        public ContainerClass()
+        {
+        }
+
+        #endregion
     }
 }
