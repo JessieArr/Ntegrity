@@ -39,7 +39,36 @@ namespace Ntegrity.Models
 
         public MethodData(string methodInfo)
         {
-            MethodSignature = methodInfo;
+            var sanitizedMethodInfo = methodInfo.Replace("\t\t", "");
+            var lines = sanitizedMethodInfo.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            for (var i = 0; i < lines.Length - 1; i++)
+            {
+                var attributeName = lines[i].Replace("[", "");
+                attributeName = attributeName.Replace("]", "");
+                AttributeData.Add(new AttributeData(attributeName));
+            }
+
+            var lastLine = lines[lines.Length - 1];
+            MethodSignature = lastLine;
+            var lastLineParts = lastLine.Split(' ');
+            var accessLevel = lastLineParts[0];
+
+            switch (accessLevel)
+            {
+                case "public":
+                    AccessLevel = AccessLevelEnum.Public;
+                    break;
+                case "private":
+                    AccessLevel = AccessLevelEnum.Private;
+                    break;
+                case "internal":
+                    AccessLevel = AccessLevelEnum.Internal;
+                    break;
+                case "protected":
+                    AccessLevel = AccessLevelEnum.Protected;
+                    break;
+            }
         }
 
         public string ToString()

@@ -7,15 +7,23 @@ namespace Ntegrity.Models
 		public readonly string Name;
 	    public bool IsCompilerGenerated;
 
-		public AttributeData(Attribute attribute)
-		{
-			Name = attribute.ToString();
-		    var attributeParts = Name.Split();
-		    var attributeTypeName = attributeParts[attributeParts.Length - 1];
-		    IsCompilerGenerated = attributeTypeName.StartsWith("__");
-		}
+        public AttributeData(Attribute attribute)
+        {
+            Name = attribute.ToString();
+            var attributeParts = Name.Split();
+            var attributeTypeName = attributeParts[attributeParts.Length - 1];
+            IsCompilerGenerated = attributeTypeName.StartsWith("__");
+        }
 
-		public override string ToString()
+        public AttributeData(string attributeString)
+        {
+            Name = attributeString;
+            var attributeParts = Name.Split();
+            var attributeTypeName = attributeParts[attributeParts.Length - 1];
+            IsCompilerGenerated = attributeTypeName.StartsWith("__");
+        }
+
+        public override string ToString()
 		{
 			return "[" + Name + "]";
 		}
