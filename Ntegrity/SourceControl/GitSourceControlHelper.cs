@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using System.IO;
+using Ntegrity.Models;
 
-namespace Ntegrity
+namespace Ntegrity.SourceControl
 {
 	public class GitSourceControlHelper : ISourceControlHelper
 	{

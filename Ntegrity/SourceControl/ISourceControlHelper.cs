@@ -1,4 +1,4 @@
-﻿namespace Ntegrity
+﻿namespace Ntegrity.SourceControl
 {
 	public interface ISourceControlHelper
 	{

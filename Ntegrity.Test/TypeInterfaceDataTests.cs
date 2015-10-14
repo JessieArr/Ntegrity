@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Ntegrity.Models;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 

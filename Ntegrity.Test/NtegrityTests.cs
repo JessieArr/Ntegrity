@@ -1,4 +1,6 @@
 ﻿using System;
+using Ntegrity.Models;
+using Ntegrity.SourceControl;
 using NUnit.Framework;
 
 namespace Ntegrity.Test

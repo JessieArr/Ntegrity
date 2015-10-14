@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using Ntegrity.Models;
 
-namespace Ntegrity
+namespace Ntegrity.SourceControl
 {
 	public class MercurialSourceControlHelper : ISourceControlHelper
 	{

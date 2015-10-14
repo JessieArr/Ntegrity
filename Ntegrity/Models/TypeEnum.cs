@@ -1,4 +1,4 @@
-﻿namespace Ntegrity
+﻿namespace Ntegrity.Models
 {
 	public enum TypeEnum
 	{

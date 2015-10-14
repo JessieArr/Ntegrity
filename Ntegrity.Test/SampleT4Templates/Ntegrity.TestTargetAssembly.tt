@@ -5,6 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Ntegrity" #>
+<#@ import namespace="Ntegrity.Models" #>
 <#@ import namespace="Ntegrity.TestTargetAssembly" #>
 <#@ output extension="Interface.txt" #>
 <#@ assembly name="bin\Debug\Ntegrity.dll" #>

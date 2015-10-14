@@ -1,39 +1,44 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Ntegrity
+namespace Ntegrity.Models
 {
-    public class FieldData
+    public class MethodData
     {
-        public readonly string FieldSignature;
+        public readonly string MethodSignature;
         public readonly AccessLevelEnum AccessLevel;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
-        public FieldData(FieldInfo fieldInfo)
+        public MethodData(MethodInfo methodInfo)
         {
-            FieldSignature = fieldInfo.ToString();
-            if (fieldInfo.IsPrivate)
+            MethodSignature = methodInfo.ToString();
+            if (methodInfo.IsPrivate)
             {
                 AccessLevel = AccessLevelEnum.Private;
             }
-            if (fieldInfo.IsFamily)
+            if (methodInfo.IsFamily)
             {
                 AccessLevel = AccessLevelEnum.Protected;
             }
-            if (fieldInfo.IsAssembly)
+            if (methodInfo.IsAssembly)
             {
                 AccessLevel = AccessLevelEnum.Internal;
             }
-            if (fieldInfo.IsPublic)
+            if (methodInfo.IsPublic)
             {
                 AccessLevel = AccessLevelEnum.Public;
             }
 
-            var attributes = fieldInfo.GetCustomAttributes();
+            var attributes = methodInfo.GetCustomAttributes();
             foreach (var attribute in attributes)
             {
                 AttributeData.Add(new AttributeData(attribute));
             }
+        }
+
+        public MethodData(string methodInfo)
+        {
+            MethodSignature = methodInfo;
         }
 
         public override string ToString()
@@ -43,17 +48,20 @@ namespace Ntegrity
 
         public string ToString(string prefix)
         {
-            return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
+            return ToString(prefix, new NtegrityOutputSettings());
         }
 
         public string ToString(string prefix, NtegrityOutputSettings outputSettings)
         {
-            if(AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+            var returnString = "";
+            if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
                 outputSettings.ShowTypesAtOrAboveAccessLevel))
             {
-                return "";
+                return returnString;
             }
-            return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
+
+            returnString += prefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
+            return returnString;
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 
-namespace Ntegrity
+namespace Ntegrity.Models
 {
 	public class ConstructorData
 	{

@@ -1,3 +1,5 @@
+using Ntegrity.Models;
+
 namespace Ntegrity
 {
     public class NtegrityOutputSettings

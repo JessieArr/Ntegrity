@@ -41,23 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessLevelEnum.cs" />
-    <Compile Include="AssemblyInterfaceData.cs" />
-    <Compile Include="AttributeData.cs" />
-    <Compile Include="ConstructorData.cs" />
-    <Compile Include="GitSourceControlHelper.cs" />
-    <Compile Include="ISourceControlHelper.cs" />
-    <Compile Include="MercurialSourceControlHelper.cs" />
-    <Compile Include="FieldData.cs" />
+    <Compile Include="Models\AccessLevelEnum.cs" />
+    <Compile Include="Models\AssemblyInterfaceData.cs" />
+    <Compile Include="Models\AttributeData.cs" />
+    <Compile Include="Models\ConstructorData.cs" />
+    <Compile Include="Models\FieldData.cs" />
+    <Compile Include="Models\MethodData.cs" />
+    <Compile Include="Models\PropertyData.cs" />
+    <Compile Include="Models\TypeEnum.cs" />
+    <Compile Include="Models\TypeInterfaceData.cs" />
     <Compile Include="NtegrityOutputSettings.cs" />
-    <Compile Include="PropertyData.cs" />
-    <Compile Include="MethodData.cs" />
     <Compile Include="Ntegrity.cs" />
     <Compile Include="NtegrityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SourceControlTypeEnum.cs" />
-    <Compile Include="TypeEnum.cs" />
-    <Compile Include="TypeInterfaceData.cs" />
+    <Compile Include="SourceControl\GitSourceControlHelper.cs" />
+    <Compile Include="SourceControl\ISourceControlHelper.cs" />
+    <Compile Include="SourceControl\MercurialSourceControlHelper.cs" />
+    <Compile Include="SourceControl\SourceControlTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Ntegrity.nuspec" />

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Ntegrity
+namespace Ntegrity.Models
 {
     public class PropertyData
     {

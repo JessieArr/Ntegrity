@@ -1,35 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Ntegrity
+namespace Ntegrity.Models
 {
-    public class MethodData
+    public class FieldData
     {
-        public readonly string MethodSignature;
+        public readonly string FieldSignature;
         public readonly AccessLevelEnum AccessLevel;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
-        public MethodData(MethodInfo methodInfo)
+        public FieldData(FieldInfo fieldInfo)
         {
-            MethodSignature = methodInfo.ToString();
-            if (methodInfo.IsPrivate)
+            FieldSignature = fieldInfo.ToString();
+            if (fieldInfo.IsPrivate)
             {
                 AccessLevel = AccessLevelEnum.Private;
             }
-            if (methodInfo.IsFamily)
+            if (fieldInfo.IsFamily)
             {
                 AccessLevel = AccessLevelEnum.Protected;
             }
-            if (methodInfo.IsAssembly)
+            if (fieldInfo.IsAssembly)
             {
                 AccessLevel = AccessLevelEnum.Internal;
             }
-            if (methodInfo.IsPublic)
+            if (fieldInfo.IsPublic)
             {
                 AccessLevel = AccessLevelEnum.Public;
             }
 
-            var attributes = methodInfo.GetCustomAttributes();
+            var attributes = fieldInfo.GetCustomAttributes();
             foreach (var attribute in attributes)
             {
                 AttributeData.Add(new AttributeData(attribute));
@@ -43,20 +43,17 @@ namespace Ntegrity
 
         public string ToString(string prefix)
         {
-            return ToString(prefix, new NtegrityOutputSettings());
+            return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
         }
 
         public string ToString(string prefix, NtegrityOutputSettings outputSettings)
         {
-            var returnString = "";
-            if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+            if(AccessLevel.HasAvailabilityEqualToOrGreaterThan(
                 outputSettings.ShowTypesAtOrAboveAccessLevel))
             {
-                return returnString;
+                return "";
             }
-
-            returnString += prefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
-            return returnString;
+            return prefix + AccessLevel.GetKeywordFromEnum() + " " + FieldSignature;
         }
     }
 }
