@@ -34,20 +34,50 @@ namespace Ntegrity
             }
         }
 
+        public AssemblyInterfaceData(string humanReadableAssemblyInterface)
+        {
+            var lines = humanReadableAssemblyInterface.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+            var assemblyLine = lines[1];
+            var versionLine = lines[2];
+            var clrVersionLine = lines[3];
+            Name = assemblyLine.Substring(AssemblyNamePrefix.Length);
+            Version = versionLine.Substring(AssemblyVersionPrefix.Length);
+            CLRVersion = clrVersionLine.Substring(CLRVersionPrefix.Length);
+
+            var i = 4;
+            if (String.Equals(lines[i], ReferencedAssembliesPrefix))
+            {
+                i++;
+                ReferencedAssemblies = new List<string>();
+                while (!lines[i].Contains(ClassesPrefix))
+                {
+                    ReferencedAssemblies.Add(lines[i]);
+                    i++;
+                }
+            }
+        }
+
         public string GenerateHumanReadableInterfaceDefinition()
         {
             return GenerateHumanReadableInterfaceDefinition(new NtegrityOutputSettings());
         }
 
+        private const string AssemblyNamePrefix = "Assembly: ";
+        private const string AssemblyVersionPrefix = "Version: ";
+        private const string CLRVersionPrefix = "Targeting CLR Version: ";
+        private const string ReferencedAssembliesPrefix = "Referenced Assemblies:";
+        private const string ClassesPrefix = "CLASSES:";
+
         public string GenerateHumanReadableInterfaceDefinition(NtegrityOutputSettings settings)
         {
             var returnString = "This is a human readable representation of the interface for the assembly:" + Environment.NewLine;
 
-            returnString += "Assembly: " + Name + Environment.NewLine;
-            returnString += "Version:  " + Version + Environment.NewLine;
-            returnString += "Targeting CLR version: " + CLRVersion + Environment.NewLine + Environment.NewLine;
+            returnString += AssemblyNamePrefix + Name + Environment.NewLine;
+            returnString += AssemblyVersionPrefix + Version + Environment.NewLine;
+            returnString += CLRVersionPrefix + CLRVersion + Environment.NewLine + Environment.NewLine;
 
-            returnString += "Referenced Assemblies:" + Environment.NewLine;
+            returnString += ReferencedAssembliesPrefix + Environment.NewLine;
             foreach (var assembly in ReferencedAssemblies)
             {
                 returnString += assembly + Environment.NewLine;
@@ -56,7 +86,7 @@ namespace Ntegrity
 
             var classes = Types.Where(x => x.Type == TypeEnum.Class);
 
-            returnString += "CLASSES: " + Environment.NewLine;
+            returnString += "CLASSES:" + Environment.NewLine;
             foreach (var classType in classes)
             {
                 if (!classType.AccessLevel.HasAvailabilityEqualToOrGreaterThan(

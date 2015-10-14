@@ -66,5 +66,20 @@ namespace Ntegrity.Test
             Assert.That(readable.IndexOf("protected") == -1);
             Assert.That(readable.IndexOf("internal") == -1);
         }
+
+        [Test]
+        public void StringConstructor_ProperlyParsesOutput()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof (PublicClass));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+
+            var SUT = new AssemblyInterfaceData(testString);
+
+            Assert.That(SUT.Name == testInterfaceData.Name);
+            Assert.That(SUT.Version == testInterfaceData.Version);
+            Assert.That(SUT.CLRVersion == testInterfaceData.CLRVersion);
+            Assert.That(SUT.ReferencedAssemblies.Count == testInterfaceData.ReferencedAssemblies.Count);
+            Assert.That(SUT.ReferencedAssemblies.All(x => testInterfaceData.ReferencedAssemblies.Any(y => y == x)));
+        }
     }
 }

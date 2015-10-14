@@ -1,12 +1,12 @@
 ﻿This is a human readable representation of the interface for the assembly:
 Assembly: Ntegrity.TestTargetAssembly
-Version:  v1.0.0.0
-Targeting CLR version: v4.0.30319
+Version: v1.0.0.0
+Targeting CLR Version: v4.0.30319
 
 Referenced Assemblies:
 mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 
-CLASSES: 
+CLASSES:
 	public class Ntegrity.TestTargetAssembly.PublicBaseClass
 	CONSTRUCTORS:
 		public Void .ctor()
@@ -43,10 +43,10 @@ CLASSES:
 
 	public class Ntegrity.TestTargetAssembly.PublicChildClass
 	INHERITS:
-	Ntegrity.TestTargetAssembly.PublicBaseClass
+		Ntegrity.TestTargetAssembly.PublicBaseClass
 	IMPLEMENTS:
-	Ntegrity.TestTargetAssembly.IPublicInterface
-	Ntegrity.TestTargetAssembly.IInternalInterface
+		Ntegrity.TestTargetAssembly.IPublicInterface
+		Ntegrity.TestTargetAssembly.IInternalInterface
 	CONSTRUCTORS:
 		public Void .ctor()
 	METHODS:
@@ -57,7 +57,7 @@ CLASSES:
 
 	public class Ntegrity.TestTargetAssembly.PublicClass
 	IMPLEMENTS:
-	Ntegrity.TestTargetAssembly.IPublicInterface
+		Ntegrity.TestTargetAssembly.IPublicInterface
 	CONSTRUCTORS:
 		public Void .ctor()
 	METHODS:
@@ -85,7 +85,7 @@ CLASSES:
 		public Int32 GetHashCode()
 		public System.Type GetType()
 	PROPERTIES:
-		Int32 IntProperty { public get; public set;  }
+		Int32 IntProperty { public get; public set; }
 	FIELDS:
 		public Int32 IntField
 
@@ -108,9 +108,9 @@ CLASSES:
 	[System.AttributeUsageAttribute]
 	public class Ntegrity.TestTargetAssembly.TestAttributeAttribute
 	INHERITS:
-	System.Attribute
+		System.Attribute
 	IMPLEMENTS:
-	System.Runtime.InteropServices._Attribute
+		System.Runtime.InteropServices._Attribute
 	CONSTRUCTORS:
 		public Void .ctor(System.String)
 	METHODS:
@@ -121,7 +121,7 @@ CLASSES:
 		public System.String ToString()
 		public System.Type GetType()
 	PROPERTIES:
-		System.Object TypeId { public get;  }
+		System.Object TypeId { public get; }
 	FIELDS:
 		public System.String Text
 
@@ -169,7 +169,7 @@ INTERFACES:
 
 	public interface Ntegrity.TestTargetAssembly.IPublicChildInterface
 	IMPLEMENTS:
-	Ntegrity.TestTargetAssembly.IPublicInterface
+		Ntegrity.TestTargetAssembly.IPublicInterface
 
 	public interface Ntegrity.TestTargetAssembly.IPublicInterface
 
@@ -185,9 +185,9 @@ INTERFACES:
 ENUMS: 
 	internal enum Ntegrity.TestTargetAssembly.InternalEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
@@ -202,9 +202,9 @@ ENUMS:
 
 	public enum Ntegrity.TestTargetAssembly.PublicEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
@@ -219,9 +219,9 @@ ENUMS:
 
 	private enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
@@ -236,9 +236,9 @@ ENUMS:
 
 	protected enum Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
@@ -253,9 +253,9 @@ ENUMS:
 
 	internal enum Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
@@ -270,9 +270,9 @@ ENUMS:
 
 	public enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicEnum
 	IMPLEMENTS:
-	System.IComparable
-	System.IFormattable
-	System.IConvertible
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
 	METHODS:
 		public Boolean Equals(System.Object)
 		public Int32 GetHashCode()
