@@ -7,6 +7,50 @@ Referenced Assemblies:
 mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 
 CLASSES:
+	public class Ntegrity.TestTargetAssembly.PublicAttributeConstructorTestClass
+	CONSTRUCTORS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.InternalAttributeConstructorTestClass
+	CONSTRUCTORS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+		internal Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.ProtectedAttributeConstructorTestClass
+	CONSTRUCTORS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+		protected Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type GetType()
+
+	public class Ntegrity.TestTargetAssembly.PrivateAttributeConstructorTestClass
+	CONSTRUCTORS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+		private Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type GetType()
+
 	public class Ntegrity.TestTargetAssembly.PublicBaseClass
 	CONSTRUCTORS:
 		public Void .ctor()
@@ -19,6 +63,7 @@ CLASSES:
 
 	public class Ntegrity.TestTargetAssembly.ContainerClass
 	CONSTRUCTORS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		public Void .ctor()
 	METHODS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
@@ -31,9 +76,12 @@ CLASSES:
 	PROPERTIES:
 		Int32 PublicPropertyWithAttributes { public get; public set; }
 	FIELDS:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		public Int32 PublicFieldWithAttributes
 
 	internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass
+	CONSTRUCTORS:
+		protected Void .ctor()
 	METHODS:
 		public System.String ToString()
 		public Boolean Equals(System.Object)
@@ -79,7 +127,7 @@ CLASSES:
 		public System.Type GetType()
 
 	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
-	internal class Ntegrity.TestTargetAssembly.PublicClassWithAttributes
+	public class Ntegrity.TestTargetAssembly.PublicClassWithAttributes
 	CONSTRUCTORS:
 		public Void .ctor()
 	METHODS:

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Ntegrity.TestTargetAssembly
 {
 	[TestAttribute("Something")]
-	class PublicClassWithAttributes
+	public class PublicClassWithAttributes
 	{
-	}
+    }
 }

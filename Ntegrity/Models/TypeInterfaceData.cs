@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Ntegrity.Models
@@ -117,7 +118,7 @@ namespace Ntegrity.Models
 
         private void CollectConstructorData(Type typeToAnalyze)
         {
-            var constructors = typeToAnalyze.GetConstructors();
+            var constructors = typeToAnalyze.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var constructor in constructors)
             {
@@ -233,7 +234,7 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += outputSettings.TypePrefix + constructor.ToString(outputSettings.TypePrefix) + Environment.NewLine;
+                    returnString += constructor.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 
@@ -277,7 +278,7 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += outputSettings.TypePrefix + field.ToString(outputSettings.TypePrefix) + Environment.NewLine;
+                    returnString += field.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 

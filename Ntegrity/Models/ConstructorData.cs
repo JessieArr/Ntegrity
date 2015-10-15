@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ntegrity.Models
@@ -36,14 +37,72 @@ namespace Ntegrity.Models
 			}
 		}
 
-        public override string ToString()
-        {
-            return ToString("");
+	    public ConstructorData(string constructorString)
+	    {
+            var sanitizedMethodInfo = constructorString.Replace("\t\t", "");
+            var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            for (var i = 0; i < lines.Length - 1; i++)
+            {
+                var attributeName = lines[i].Replace("[", "");
+                attributeName = attributeName.Replace("]", "");
+                AttributeData.Add(new AttributeData(attributeName));
+            }
+
+            var lastLine = lines[lines.Length - 1];
+            ConstructorSignature = lastLine;
+            var lastLineParts = lastLine.Split(' ');
+            var accessLevel = lastLineParts[0];
+
+            switch (accessLevel)
+            {
+                case "public":
+                    AccessLevel = AccessLevelEnum.Public;
+                    break;
+                case "private":
+                    AccessLevel = AccessLevelEnum.Private;
+                    break;
+                case "internal":
+                    AccessLevel = AccessLevelEnum.Internal;
+                    break;
+                case "protected":
+                    AccessLevel = AccessLevelEnum.Protected;
+                    break;
+            }
         }
 
-        public string ToString(string prefix)
+        public override string ToString()
         {
-            return prefix + AccessLevel.GetKeywordFromEnum() + " " + ConstructorSignature;
+            return ToString(new NtegrityOutputSettings());
+        }
+
+        public string ToString(NtegrityOutputSettings outputSettings)
+        {
+            if (!AccessLevel.HasAvailabilityEqualToOrGreaterThan(
+                outputSettings.ShowTypesAtOrAboveAccessLevel))
+            {
+                return "";
+            }
+
+            var returnString = "";
+
+            if (AttributeData.Count > 0)
+            {
+                foreach (var attribute in AttributeData)
+                {
+                    if (!outputSettings.ShowCompilerAttributes)
+                    {
+                        if (attribute.IsCompilerGenerated)
+                        {
+                            continue;
+                        }
+                    }
+
+                    returnString += outputSettings.MemberPrefix + "[" + attribute.Name + "]" + Environment.NewLine;
+                }
+            }
+
+            return returnString + outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum() + " " + ConstructorSignature;
         }
     }
 }

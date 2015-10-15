@@ -92,7 +92,7 @@ namespace Ntegrity.Models
                 {
                     continue;
                 }
-                returnString += classType.ToString() + Environment.NewLine;
+                returnString += classType.ToString(settings) + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 

@@ -54,7 +54,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssemblyInterfaceDataTests.cs" />
+    <Compile Include="ConstructorDataTests.cs" />
     <Compile Include="GitSourceControlHelperSystemTests.cs" />
+    <Compile Include="FieldDataTests.cs" />
     <Compile Include="MethodDataTests.cs" />
     <Compile Include="NtegrityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
