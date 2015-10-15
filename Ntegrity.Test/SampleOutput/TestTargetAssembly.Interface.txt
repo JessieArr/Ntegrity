@@ -51,6 +51,21 @@ CLASSES:
 		[System.Security.SecuritySafeCriticalAttribute]
 		public System.Type GetType()
 
+	public class Ntegrity.TestTargetAssembly.PropertyTestClass
+	CONSTRUCTORS:
+		public Void .ctor()
+	METHODS:
+		public System.String ToString()
+		public Boolean Equals(System.Object)
+		public Int32 GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type GetType()
+	PROPERTIES:
+		Int32 PublicProperty { public get; public set; }
+		Int32 InternalProperty { internal get; internal set; }
+		Int32 ProtectedProperty { protected get; protected set; }
+		Int32 PrivateProperty { private get; private set; }
+
 	public class Ntegrity.TestTargetAssembly.PublicBaseClass
 	CONSTRUCTORS:
 		public Void .ctor()
@@ -74,6 +89,7 @@ CLASSES:
 		[System.Security.SecuritySafeCriticalAttribute]
 		public System.Type GetType()
 	PROPERTIES:
+		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		Int32 PublicPropertyWithAttributes { public get; public set; }
 	FIELDS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]

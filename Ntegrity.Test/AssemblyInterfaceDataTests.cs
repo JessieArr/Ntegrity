@@ -16,7 +16,6 @@ namespace Ntegrity.Test
 		[SetUp]
 		public void Init()
 		{
-			
 		}
 
         [Explicit]

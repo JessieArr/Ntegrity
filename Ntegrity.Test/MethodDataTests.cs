@@ -64,7 +64,6 @@ namespace Ntegrity.Test
         [Test]
         public void MethodWithAttributesFromString_HasAttributes()
         {
-            var attributeName = "Ntegrity.TestTargetAssembly.TestAttributeAttribute";
             var method = typeof(ContainerClass).GetMethods().Single(x => x.Name == "PublicMethodWithAttributes");
             var testMethodData = new MethodData(method);
 
@@ -72,7 +71,7 @@ namespace Ntegrity.Test
             var SUT = new MethodData(testString);
 
             Assert.That(SUT.AttributeData.Count > 0);
-            Assert.That(SUT.AttributeData.Any(x => x.Name == attributeName));
+            Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
         }
     }
 }

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInterfaceDataTests.cs" />
     <Compile Include="ConstructorDataTests.cs" />
+    <Compile Include="PropertyDataTests.cs" />
     <Compile Include="GitSourceControlHelperSystemTests.cs" />
     <Compile Include="FieldDataTests.cs" />
     <Compile Include="MethodDataTests.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ntegrity.Models
@@ -16,7 +17,7 @@ namespace Ntegrity.Models
         {
             PropertySignature = propertyInfo.ToString();
 
-            var getter = propertyInfo.GetGetMethod();
+            var getter = propertyInfo.GetGetMethod(true);
             HasGetter = getter != null;
             if (HasGetter)
             {
@@ -38,7 +39,7 @@ namespace Ntegrity.Models
                 }
             }
 
-            var setter = propertyInfo.GetSetMethod();
+            var setter = propertyInfo.GetSetMethod(true);
             HasSetter = setter != null;
             if (HasSetter)
             {
@@ -67,18 +68,84 @@ namespace Ntegrity.Models
             }
         }
 
-        public override string ToString()
+        public PropertyData(string propertyString)
         {
-            return ToString("");
+            var sanitizedMethodInfo = propertyString.Replace("\t\t", "");
+            var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            for (var i = 0; i < lines.Length - 1; i++)
+            {
+                var attributeName = lines[i].Replace("[", "");
+                attributeName = attributeName.Replace("]", "");
+                AttributeData.Add(new AttributeData(attributeName));
+            }
+
+            var lastLine = lines[lines.Length - 1];
+            PropertySignature = lastLine;
+            var lastLineParts = lastLine.Split('}');
+            lastLineParts = lastLineParts[0].Split('{');
+            var getterAndSetter = lastLineParts[1];
+            var splitGetterAndSetter = getterAndSetter.Split(';');
+            var getter = splitGetterAndSetter[0].Trim();
+            var setter = splitGetterAndSetter[1].Trim();
+
+            switch (getter)
+            {
+                case "public get":
+                    GetterAccessLevel = AccessLevelEnum.Public;
+                    break;
+                case "private get":
+                    GetterAccessLevel = AccessLevelEnum.Private;
+                    break;
+                case "internal get":
+                    GetterAccessLevel = AccessLevelEnum.Internal;
+                    break;
+                case "protected get":
+                    GetterAccessLevel = AccessLevelEnum.Protected;
+                    break;
+            }
+
+            switch (setter)
+            {
+                case "public set":
+                    SetterAccessLevel = AccessLevelEnum.Public;
+                    break;
+                case "private set":
+                    SetterAccessLevel = AccessLevelEnum.Private;
+                    break;
+                case "internal set":
+                    SetterAccessLevel = AccessLevelEnum.Internal;
+                    break;
+                case "protected set":
+                    SetterAccessLevel = AccessLevelEnum.Protected;
+                    break;
+            }
         }
 
-        public string ToString(string prefix)
+        public string ToString()
         {
-            return ToString(prefix, new NtegrityOutputSettings());
+            return ToString(new NtegrityOutputSettings());
         }
 
-        public string ToString(string prefix, NtegrityOutputSettings outputSettings)
+        public string ToString(NtegrityOutputSettings outputSettings)
         {
+            var returnString = "";
+
+            if (AttributeData.Count > 0)
+            {
+                foreach (var attribute in AttributeData)
+                {
+                    if (!outputSettings.ShowCompilerAttributes)
+                    {
+                        if (attribute.IsCompilerGenerated)
+                        {
+                            continue;
+                        }
+                    }
+
+                    returnString += outputSettings.MemberPrefix + "[" + attribute.Name + "]" + Environment.NewLine;
+                }
+            }
             var accessorString = "{ ";
             if (HasGetter && GetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
                     outputSettings.ShowTypesAtOrAboveAccessLevel))
@@ -92,7 +159,7 @@ namespace Ntegrity.Models
             }
             accessorString += "}";
 
-            return prefix + PropertySignature + " " + accessorString;
+            return returnString + outputSettings.MemberPrefix + PropertySignature + " " + accessorString;
         }
     }
 }

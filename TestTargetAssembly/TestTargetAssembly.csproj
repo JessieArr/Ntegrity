@@ -46,6 +46,7 @@
     <Compile Include="InternalEnum.cs" />
     <Compile Include="InternalStruct.cs" />
     <Compile Include="IPublicChildInterface.cs" />
+    <Compile Include="PropertyTestClass.cs" />
     <Compile Include="PublicBaseClass.cs" />
     <Compile Include="ContainerClass.cs" />
     <Compile Include="InternalAbstractClass.cs" />

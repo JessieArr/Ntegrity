@@ -143,7 +143,8 @@ namespace Ntegrity.Models
 
         private void CollectPropertyData(Type typeToAnalyze)
         {
-            var properties = typeToAnalyze.GetProperties();
+            var properties = typeToAnalyze.GetProperties(
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
 
             foreach (var property in properties)
             {
@@ -264,7 +265,7 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += outputSettings.TypePrefix + property.ToString(outputSettings.TypePrefix, outputSettings) + Environment.NewLine;
+                    returnString += property.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 
