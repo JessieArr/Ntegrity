@@ -335,5 +335,22 @@ namespace Ntegrity.Test
                 x => String.Equals(x, "Ntegrity.TestTargetAssembly.IInternalInterface",
                 StringComparison.OrdinalIgnoreCase)));
         }
+
+	    [Test]
+	    public void Constructor_ParsesSteringInput()
+	    {
+	        var testString = "\tpublic class Ntegrity.TestTargetAssembly.PublicAttributeConstructorTestClass" + Environment.NewLine +
+                             "\tCONSTRUCTORS:" + Environment.NewLine +
+	                         "\t\t[Ntegrity.TestTargetAssembly.TestAttributeAttribute]" + Environment.NewLine +
+                             "\t\tpublic Void.ctor()" + Environment.NewLine +
+                             "\tMETHODS:" + Environment.NewLine +
+                             "\t\tpublic System.String ToString()" + Environment.NewLine +
+                             "\t\tpublic Boolean Equals(System.Object)" + Environment.NewLine +
+                             "\t\tpublic Int32 GetHashCode()" + Environment.NewLine +
+                             "\t[System.Security.SecuritySafeCriticalAttribute]" + Environment.NewLine +
+                             "\t\tpublic System.Type GetType()";
+            var SUT = new TypeInterfaceData(testString);
+            Assert.NotNull(SUT);
+        }
     }
 }

@@ -106,7 +106,12 @@ namespace Ntegrity.Models
             ImplementsInterfaces = typeToAnalyze.GetInterfaces().Select(x => x.FullName).ToList();
         }
 
-		private void CollectAttributeData(Type typeToAnalyze)
+	    public TypeInterfaceData(string typeString)
+	    {
+	        
+	    }
+
+        private void CollectAttributeData(Type typeToAnalyze)
 		{
 			var attributes = typeToAnalyze.GetCustomAttributes(true);
 
