@@ -337,20 +337,18 @@ namespace Ntegrity.Test
         }
 
 	    [Test]
-	    public void Constructor_ParsesSteringInput()
+	    public void Constructor_Parses_ClassStringInput()
 	    {
-	        var testString = "\tpublic class Ntegrity.TestTargetAssembly.PublicAttributeConstructorTestClass" + Environment.NewLine +
-                             "\tCONSTRUCTORS:" + Environment.NewLine +
-	                         "\t\t[Ntegrity.TestTargetAssembly.TestAttributeAttribute]" + Environment.NewLine +
-                             "\t\tpublic Void.ctor()" + Environment.NewLine +
-                             "\tMETHODS:" + Environment.NewLine +
-                             "\t\tpublic System.String ToString()" + Environment.NewLine +
-                             "\t\tpublic Boolean Equals(System.Object)" + Environment.NewLine +
-                             "\t\tpublic Int32 GetHashCode()" + Environment.NewLine +
-                             "\t[System.Security.SecuritySafeCriticalAttribute]" + Environment.NewLine +
-                             "\t\tpublic System.Type GetType()";
+	        var testType = new TypeInterfaceData(typeof(PublicClassWithAttributes));
+	        var testString = testType.ToString();
+
             var SUT = new TypeInterfaceData(testString);
+
             Assert.NotNull(SUT);
+            Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
+            Assert.That(SUT.AttributeData.Count == testType.AttributeData.Count);
+            Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
+            Assert.That(SUT.Type == testType.Type);
         }
     }
 }

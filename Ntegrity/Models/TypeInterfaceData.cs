@@ -90,10 +90,19 @@ namespace Ntegrity.Models
 			IsStatic = IsSealed && IsAbstract;
 
 			CollectAttributeData(typeToAnalyze);
-			CollectConstructorData(typeToAnalyze);
+            AttributeData = AttributeData.OrderBy(x => x.ToString()).ToList();
+
+            CollectConstructorData(typeToAnalyze);
+            ConstructorData = ConstructorData.OrderBy(x => x.ToString()).ToList();
+
             CollectMethodData(typeToAnalyze);
+            MethodData = MethodData.OrderBy(x => x.ToString()).ToList();
+
             CollectPropertyData(typeToAnalyze);
+            PropertyData = PropertyData.OrderBy(x => x.ToString()).ToList();
+
             CollectFieldData(typeToAnalyze);
+            FieldData = FieldData.OrderBy(x => x.ToString()).ToList();
 
             if (typeToAnalyze.BaseType != null 
                 && typeToAnalyze.BaseType.FullName != "System.Object"
@@ -108,12 +117,42 @@ namespace Ntegrity.Models
 
 	    public TypeInterfaceData(string typeString)
 	    {
-	        
-	    }
+            var sanitizedTypeInfo = typeString.Replace("\t", "");
+            var lines = sanitizedTypeInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+	        var i = 0;
+            while(lines[i].StartsWith("[") && i < 1000)
+            {
+                var attributeName = lines[i].Replace("[", "");
+                attributeName = attributeName.Replace("]", "");
+                AttributeData.Add(new AttributeData(attributeName));
+                i++;
+            }
+
+            var classNameLine = lines[i];
+            var lastLineParts = classNameLine.Split(' ');
+            var accessLevel = lastLineParts[0];
+
+            switch (accessLevel)
+            {
+                case "public":
+                    AccessLevel = AccessLevelEnum.Public;
+                    break;
+                case "private":
+                    AccessLevel = AccessLevelEnum.Private;
+                    break;
+                case "internal":
+                    AccessLevel = AccessLevelEnum.Internal;
+                    break;
+                case "protected":
+                    AccessLevel = AccessLevelEnum.Protected;
+                    break;
+            }
+        }
 
         private void CollectAttributeData(Type typeToAnalyze)
 		{
-			var attributes = typeToAnalyze.GetCustomAttributes(true);
+			var attributes = typeToAnalyze.GetCustomAttributes(true).OrderBy(x => x);
 
 			foreach (var attribute in attributes)
 			{
