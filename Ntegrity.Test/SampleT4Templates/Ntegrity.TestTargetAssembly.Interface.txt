@@ -151,6 +151,36 @@ INTERFACES:
 
 
 ENUMS: 
+	internal enum Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalEnum
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
+	private enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateEnum
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
+	protected enum Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedEnum
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
+	public enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicEnum
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
+	public enum Ntegrity.TestTargetAssembly.ContainerClass+TestEnum
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
 	internal enum Ntegrity.TestTargetAssembly.InternalEnum
 	IMPLEMENTS:
 		System.IComparable
@@ -172,36 +202,6 @@ ENUMS:
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueOne
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueThree
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueTwo
-
-	private enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateEnum
-	IMPLEMENTS:
-		System.IComparable
-		System.IFormattable
-		System.IConvertible
-
-	protected enum Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedEnum
-	IMPLEMENTS:
-		System.IComparable
-		System.IFormattable
-		System.IConvertible
-
-	internal enum Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalEnum
-	IMPLEMENTS:
-		System.IComparable
-		System.IFormattable
-		System.IConvertible
-
-	public enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicEnum
-	IMPLEMENTS:
-		System.IComparable
-		System.IFormattable
-		System.IConvertible
-
-	public enum Ntegrity.TestTargetAssembly.ContainerClass+TestEnum
-	IMPLEMENTS:
-		System.IComparable
-		System.IFormattable
-		System.IConvertible
 
 
 STRUCTS: 
