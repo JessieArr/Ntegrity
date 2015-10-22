@@ -9,7 +9,12 @@ namespace Ntegrity
         public string TypePrefix { get; set; }
         public string MemberPrefix { get; set; }
 
+        // Attributes
         public bool ShowCompilerAttributes { get; set; }
+
+        // Methods
+        public bool ShowInheritedMethods { get; set; }
+        public bool ShowMethodsInheritedFromSystemTypes { get; set; }
 
         public NtegrityOutputSettings()
         {
@@ -19,6 +24,8 @@ namespace Ntegrity
             MemberPrefix = "\t\t";
 
             ShowCompilerAttributes = false;
+            ShowInheritedMethods = true;
+            ShowMethodsInheritedFromSystemTypes = false;
         }
     }
 }

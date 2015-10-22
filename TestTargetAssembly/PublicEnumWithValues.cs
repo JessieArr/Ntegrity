@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ntegrity.TestTargetAssembly
 {
-    public class PublicBaseClass
+    public enum PublicEnumWithValues
     {
-        public int PublicIntMethod()
-        {
-            return 0;
-        }
+        ValueOne,
+        ValueTwo,
+        ValueThree
     }
 }

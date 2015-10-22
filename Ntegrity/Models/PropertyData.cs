@@ -122,7 +122,7 @@ namespace Ntegrity.Models
             }
         }
 
-        public string ToString()
+        public new string ToString()
         {
             return ToString(new NtegrityOutputSettings());
         }

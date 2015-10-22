@@ -49,6 +49,7 @@
     <Compile Include="Models\MethodData.cs" />
     <Compile Include="Models\PropertyData.cs" />
     <Compile Include="Models\TypeEnum.cs" />
+    <Compile Include="Models\EnumInterfaceData.cs" />
     <Compile Include="Models\TypeInterfaceData.cs" />
     <Compile Include="NtegrityOutputSettings.cs" />
     <Compile Include="Ntegrity.cs" />

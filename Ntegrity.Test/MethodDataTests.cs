@@ -21,6 +21,14 @@ namespace Ntegrity.Test
         }
 
         [Test]
+        public void InheritedMethod_IsIdentified()
+        {
+            var method = typeof(ContainerClass).GetMethods().Single(x => x.Name == "ToString");
+            var SUT = new MethodData(method);
+            Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
+        }
+
+        [Test]
         public void MethodWithAttributes_HasAttributes()
         {
             var method = typeof(ContainerClass).GetMethods().Single(x => x.Name == "PublicMethodWithAttributes");

@@ -115,6 +115,11 @@ namespace Ntegrity.TestTargetAssembly
         {
         }
 
+        public enum TestEnum
+        {
+            
+        }
+
         #endregion
     }
 }

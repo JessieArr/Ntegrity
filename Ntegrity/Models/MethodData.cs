@@ -7,12 +7,19 @@ namespace Ntegrity.Models
     public class MethodData
     {
         public readonly string MethodSignature;
+        public readonly string ReturnType;
+        public readonly bool IsInherited;
+        public readonly string DeclaringType;
         public readonly AccessLevelEnum AccessLevel;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
         public MethodData(MethodInfo methodInfo)
         {
-            MethodSignature = methodInfo.ToString();
+            var methodString = methodInfo.ToString();
+            var splitIndex = methodString.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
+            ReturnType = methodString.Substring(0, splitIndex);
+            MethodSignature = methodString.Substring(splitIndex + 1, methodString.Length - (splitIndex + 1));
+
             if (methodInfo.IsPrivate)
             {
                 AccessLevel = AccessLevelEnum.Private;
@@ -28,6 +35,16 @@ namespace Ntegrity.Models
             if (methodInfo.IsPublic)
             {
                 AccessLevel = AccessLevelEnum.Public;
+            }
+
+            if (methodInfo.ReflectedType == null || methodInfo.DeclaringType == null)
+            {
+                throw new Exception("Method Lacked Declarign or Reflected Type Data.");
+            }
+            if (methodInfo.DeclaringType.FullName != methodInfo.ReflectedType.FullName)
+            {
+                IsInherited = true;
+                DeclaringType = methodInfo.DeclaringType.FullName;
             }
 
             var attributes = methodInfo.GetCustomAttributes();
@@ -71,7 +88,7 @@ namespace Ntegrity.Models
             }
         }
 
-        public string ToString()
+        public new string ToString()
         {
             return ToString(new NtegrityOutputSettings());
         }
@@ -101,7 +118,13 @@ namespace Ntegrity.Models
                 }
             }
 
-            returnString += outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum() + " " + MethodSignature;
+            returnString += outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum()
+                            + " " + ReturnType + " ";
+            if (IsInherited)
+            {
+                returnString += DeclaringType + ".";
+            }
+            returnString += MethodSignature;
             return returnString;
         }
     }

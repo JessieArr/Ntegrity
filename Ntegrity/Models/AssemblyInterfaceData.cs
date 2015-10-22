@@ -7,6 +7,7 @@ namespace Ntegrity.Models
 {
 	public class AssemblyInterfaceData
 	{
+        public readonly List<EnumInterfaceData> Enums = new List<EnumInterfaceData>(); 
 		public readonly List<TypeInterfaceData> Types = new List<TypeInterfaceData>();
 		public readonly Assembly Assembly;
 	    public readonly List<string> ReferencedAssemblies; 
@@ -28,10 +29,43 @@ namespace Ntegrity.Models
 
             foreach (var type in types)
             {
-                Types.Add(new TypeInterfaceData(type));
+                var typeEnumValue = GetTypeEnumValueForType(type);
+                switch (typeEnumValue)
+                {
+                    case TypeEnum.Enum:
+                        Enums.Add(new EnumInterfaceData(type));
+                        break;
+                    default:
+                        Types.Add(new TypeInterfaceData(type));
+                        break;
+                }
             }
 
             Types = Types.OrderBy(x => x.Name).ToList();
+        }
+
+	    private TypeEnum GetTypeEnumValueForType(Type typeToAnalyze)
+	    {
+            if (typeToAnalyze.IsClass)
+            {
+                return TypeEnum.Class;
+            }
+            if (typeToAnalyze.IsInterface)
+            {
+                return TypeEnum.Interface;
+            }
+
+            // Structs are value types, but not enums. Enums are both.
+            if (typeToAnalyze.IsEnum && typeToAnalyze.IsValueType)
+            {
+                return TypeEnum.Enum;
+            }
+            if (typeToAnalyze.IsValueType)
+            {
+                return TypeEnum.Struct;
+            }
+
+            throw new NtegrityException("Unable to determine data type for type: " + typeToAnalyze.AssemblyQualifiedName);
         }
 
         public AssemblyInterfaceData(string humanReadableAssemblyInterface)
@@ -78,7 +112,8 @@ namespace Ntegrity.Models
             returnString += CLRVersionPrefix + CLRVersion + Environment.NewLine + Environment.NewLine;
 
             returnString += ReferencedAssembliesPrefix + Environment.NewLine;
-            foreach (var assembly in ReferencedAssemblies)
+            var referencedAssemblies = ReferencedAssemblies.OrderBy(x => x);
+            foreach (var assembly in referencedAssemblies)
             {
                 returnString += assembly + Environment.NewLine;
             }
@@ -111,7 +146,7 @@ namespace Ntegrity.Models
             }
             returnString += Environment.NewLine;
 
-            var enums = Types.Where(x => x.Type == TypeEnum.Enum).OrderBy(x => x.Name);
+            var enums = Enums.OrderBy(x => x.Name);
             returnString += "ENUMS: " + Environment.NewLine;
             foreach (var enumType in enums)
             {

@@ -6,58 +6,31 @@ using System.Runtime.CompilerServices;
 
 namespace Ntegrity.Models
 {
-	public class TypeInterfaceData
+	public class EnumInterfaceData
 	{
 		public readonly string Name;
 		public readonly TypeEnum Type;
 		public readonly AccessLevelEnum AccessLevel;
-		public readonly bool IsSealed;
-		public readonly bool IsAbstract;
-		public readonly bool IsStatic;
 		
 		public readonly List<AttributeData> AttributeData = new List<AttributeData>();
         public readonly List<ConstructorData> ConstructorData = new List<ConstructorData>();
         public readonly List<MethodData> MethodData = new List<MethodData>();
         public readonly List<PropertyData> PropertyData = new List<PropertyData>();
         public readonly List<FieldData> FieldData = new List<FieldData>();
-        public readonly string InheritsFrom;
         public readonly List<string> ImplementsInterfaces;
 
-        public TypeInterfaceData(Type typeToAnalyze)
+        public EnumInterfaceData(Type typeToAnalyze)
 		{
-			Name = typeToAnalyze.FullName;
+            if (!typeToAnalyze.IsEnum)
+			{
+                throw new NtegrityException("Type: " + typeToAnalyze.AssemblyQualifiedName + " is not an Enum.");
+            }
 
-			var foundType = false;
-			if (typeToAnalyze.IsClass)
-			{
-				Type = TypeEnum.Class;
-				foundType = true;
-			}
-			if (typeToAnalyze.IsInterface)
-			{
-				Type = TypeEnum.Interface;
-				foundType = true;
-			}
-			if (typeToAnalyze.IsEnum)
-			{
-				Type = TypeEnum.Enum;
-				foundType = true;
-			}
-			else
-			{
-				// Structs are value types, but not enums. Enums are both.
-				if (typeToAnalyze.IsValueType)
-				{
-					Type = TypeEnum.Struct;
-					foundType = true;
-				}
-			}
-			if (!foundType)
-			{
-				throw new NtegrityException("Unable to determine data type for type: " + typeToAnalyze.AssemblyQualifiedName);
-			}
+            Name = typeToAnalyze.FullName;
 
-			var foundAccessLevel = false;
+            Type = TypeEnum.Enum;
+
+            var foundAccessLevel = false;
             if (typeToAnalyze.IsNestedPrivate)
             {
                 AccessLevel = AccessLevelEnum.Private;
@@ -84,11 +57,6 @@ namespace Ntegrity.Models
 				throw new NtegrityException("Unable to determine access level for type: " + typeToAnalyze.AssemblyQualifiedName);
 			}
 
-			IsSealed = typeToAnalyze.IsSealed;
-			IsAbstract = typeToAnalyze.IsAbstract;
-			// static types are both sealed and abstract. They can neither be inherited from nor instantiated.
-			IsStatic = IsSealed && IsAbstract;
-
 			CollectAttributeData(typeToAnalyze);
             AttributeData = AttributeData.OrderBy(x => x.ToString()).ToList();
 
@@ -103,19 +71,11 @@ namespace Ntegrity.Models
 
             CollectFieldData(typeToAnalyze);
             FieldData = FieldData.OrderBy(x => x.ToString()).ToList();
-
-            if (typeToAnalyze.BaseType != null 
-                && typeToAnalyze.BaseType.FullName != "System.Object"
-                && typeToAnalyze.BaseType.FullName != "System.ValueType"
-                && typeToAnalyze.BaseType.FullName != "System.Enum")
-            {
-                InheritsFrom = typeToAnalyze.BaseType.FullName;
-            }
             
             ImplementsInterfaces = typeToAnalyze.GetInterfaces().Select(x => x.FullName).ToList();
         }
 
-	    public TypeInterfaceData(string typeString)
+	    public EnumInterfaceData(string typeString)
 	    {
             var sanitizedTypeInfo = typeString.Replace("\t", "");
             var lines = sanitizedTypeInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
@@ -232,33 +192,8 @@ namespace Ntegrity.Models
             }
             returnString += outputSettings.TypePrefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
 
-            if (Type == TypeEnum.Class)
-            {
-                if (IsStatic)
-                {
-                    returnString += "static ";
-                }
-                else
-                {
-                    if (IsAbstract)
-                    {
-                        returnString += "abstract ";
-                    }
-                    if (IsSealed)
-                    {
-                        returnString += "sealed ";
-                    }
-                }
-            }
-
             returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
             returnString += Name + Environment.NewLine;
-
-            if (!String.IsNullOrEmpty(InheritsFrom))
-            {
-                returnString += outputSettings.TypePrefix + "INHERITS:" + Environment.NewLine;
-                returnString += outputSettings.MemberPrefix + InheritsFrom + Environment.NewLine;
-            }
 
             if (ImplementsInterfaces.Count > 0)
             {
