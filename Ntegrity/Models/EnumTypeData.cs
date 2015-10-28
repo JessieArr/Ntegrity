@@ -6,58 +6,29 @@ using System.Runtime.CompilerServices;
 
 namespace Ntegrity.Models
 {
-	public class TypeInterfaceData
+	public class EnumTypeData
 	{
 		public readonly string Name;
 		public readonly TypeEnum Type;
 		public readonly AccessLevelEnum AccessLevel;
-		public readonly bool IsSealed;
-		public readonly bool IsAbstract;
-		public readonly bool IsStatic;
 		
 		public readonly List<AttributeData> AttributeData = new List<AttributeData>();
-        public readonly List<ConstructorData> ConstructorData = new List<ConstructorData>();
         public readonly List<MethodData> MethodData = new List<MethodData>();
-        public readonly List<PropertyData> PropertyData = new List<PropertyData>();
         public readonly List<FieldData> FieldData = new List<FieldData>();
-        public readonly string InheritsFrom;
         public readonly List<string> ImplementsInterfaces;
 
-        public TypeInterfaceData(Type typeToAnalyze)
+        public EnumTypeData(Type typeToAnalyze)
 		{
-			Name = typeToAnalyze.FullName;
+            if (!typeToAnalyze.IsEnum)
+			{
+                throw new NtegrityException("Type: " + typeToAnalyze.AssemblyQualifiedName + " is not an Enum.");
+            }
 
-			var foundType = false;
-			if (typeToAnalyze.IsClass)
-			{
-				Type = TypeEnum.Class;
-				foundType = true;
-			}
-			if (typeToAnalyze.IsInterface)
-			{
-				Type = TypeEnum.Interface;
-				foundType = true;
-			}
-			if (typeToAnalyze.IsEnum)
-			{
-				Type = TypeEnum.Enum;
-				foundType = true;
-			}
-			else
-			{
-				// Structs are value types, but not enums. Enums are both.
-				if (typeToAnalyze.IsValueType)
-				{
-					Type = TypeEnum.Struct;
-					foundType = true;
-				}
-			}
-			if (!foundType)
-			{
-				throw new NtegrityException("Unable to determine data type for type: " + typeToAnalyze.AssemblyQualifiedName);
-			}
+            Name = typeToAnalyze.FullName;
 
-			var foundAccessLevel = false;
+            Type = TypeEnum.Enum;
+
+            var foundAccessLevel = false;
             if (typeToAnalyze.IsNestedPrivate)
             {
                 AccessLevel = AccessLevelEnum.Private;
@@ -84,38 +55,19 @@ namespace Ntegrity.Models
 				throw new NtegrityException("Unable to determine access level for type: " + typeToAnalyze.AssemblyQualifiedName);
 			}
 
-			IsSealed = typeToAnalyze.IsSealed;
-			IsAbstract = typeToAnalyze.IsAbstract;
-			// static types are both sealed and abstract. They can neither be inherited from nor instantiated.
-			IsStatic = IsSealed && IsAbstract;
-
 			CollectAttributeData(typeToAnalyze);
             AttributeData = AttributeData.OrderBy(x => x.ToString()).ToList();
-
-            CollectConstructorData(typeToAnalyze);
-            ConstructorData = ConstructorData.OrderBy(x => x.ToString()).ToList();
 
             CollectMethodData(typeToAnalyze);
             MethodData = MethodData.OrderBy(x => x.ToString()).ToList();
 
-            CollectPropertyData(typeToAnalyze);
-            PropertyData = PropertyData.OrderBy(x => x.ToString()).ToList();
-
             CollectFieldData(typeToAnalyze);
             FieldData = FieldData.OrderBy(x => x.ToString()).ToList();
-
-            if (typeToAnalyze.BaseType != null 
-                && typeToAnalyze.BaseType.FullName != "System.Object"
-                && typeToAnalyze.BaseType.FullName != "System.ValueType"
-                && typeToAnalyze.BaseType.FullName != "System.Enum")
-            {
-                InheritsFrom = typeToAnalyze.BaseType.FullName;
-            }
             
             ImplementsInterfaces = typeToAnalyze.GetInterfaces().Select(x => x.FullName).ToList();
         }
 
-	    public TypeInterfaceData(string typeString)
+	    public EnumTypeData(string typeString)
 	    {
             var sanitizedTypeInfo = typeString.Replace("\t", "");
             var lines = sanitizedTypeInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
@@ -129,9 +81,10 @@ namespace Ntegrity.Models
                 i++;
             }
 
-            var classNameLine = lines[i];
-            var lastLineParts = classNameLine.Split(' ');
-            var accessLevel = lastLineParts[0];
+            var enumNameLine = lines[i];
+            var enumNameLineParts = enumNameLine.Split(' ');
+            var accessLevel = enumNameLineParts[0];
+            var type = enumNameLineParts[1];
 
             switch (accessLevel)
             {
@@ -148,6 +101,12 @@ namespace Ntegrity.Models
                     AccessLevel = AccessLevelEnum.Protected;
                     break;
             }
+
+	        if (!type.Equals("enum"))
+	        {
+	            throw new Exception("Non-enum type passed to EnumTypeData constructor!");
+	        }
+            Type = TypeEnum.Enum;
         }
 
         private void CollectAttributeData(Type typeToAnalyze)
@@ -159,16 +118,6 @@ namespace Ntegrity.Models
 				AttributeData.Add(new AttributeData((Attribute)attribute));
 			}
 		}
-
-        private void CollectConstructorData(Type typeToAnalyze)
-        {
-            var constructors = typeToAnalyze.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-            foreach (var constructor in constructors)
-            {
-                ConstructorData.Add(new ConstructorData(constructor));
-            }
-        }
 
         private void CollectMethodData(Type typeToAnalyze)
         {
@@ -182,17 +131,6 @@ namespace Ntegrity.Models
                     continue;
                 }
                 MethodData.Add(new MethodData(method));
-            }
-        }
-
-        private void CollectPropertyData(Type typeToAnalyze)
-        {
-            var properties = typeToAnalyze.GetProperties(
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-
-            foreach (var property in properties)
-            {
-                PropertyData.Add(new PropertyData(property));
             }
         }
 
@@ -226,39 +164,15 @@ namespace Ntegrity.Models
                 return returnString;
             }
 
-            foreach (var attribute in AttributeData)
+            var attributes = AttributeData.OrderBy(x => x.Name);
+            foreach (var attribute in attributes)
             {
                 returnString += outputSettings.TypePrefix + attribute + Environment.NewLine;
             }
             returnString += outputSettings.TypePrefix + AccessLevelEnumHelpers.GetKeywordFromEnum(AccessLevel) + " ";
 
-            if (Type == TypeEnum.Class)
-            {
-                if (IsStatic)
-                {
-                    returnString += "static ";
-                }
-                else
-                {
-                    if (IsAbstract)
-                    {
-                        returnString += "abstract ";
-                    }
-                    if (IsSealed)
-                    {
-                        returnString += "sealed ";
-                    }
-                }
-            }
-
             returnString += TypeEnumHelpers.GetKeywordFromEnum(Type) + " ";
             returnString += Name + Environment.NewLine;
-
-            if (!String.IsNullOrEmpty(InheritsFrom))
-            {
-                returnString += outputSettings.TypePrefix + "INHERITS:" + Environment.NewLine;
-                returnString += outputSettings.MemberPrefix + InheritsFrom + Environment.NewLine;
-            }
 
             if (ImplementsInterfaces.Count > 0)
             {
@@ -266,20 +180,6 @@ namespace Ntegrity.Models
                 foreach (var interfaceName in ImplementsInterfaces)
                 {
                     returnString += outputSettings.MemberPrefix + interfaceName + Environment.NewLine;
-                }
-            }
-
-            if (ConstructorData.Count > 0)
-            {
-                returnString += outputSettings.TypePrefix + "CONSTRUCTORS:" + Environment.NewLine;
-                foreach (var constructor in ConstructorData)
-                {
-                    if (!constructor.AccessLevel.HasAvailabilityEqualToOrGreaterThan(
-                    outputSettings.ShowTypesAtOrAboveAccessLevel))
-                    {
-                        continue;
-                    }
-                    returnString += constructor.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 
@@ -309,22 +209,6 @@ namespace Ntegrity.Models
                         continue;
                     }
                     returnString += method.ToString() + Environment.NewLine;
-                }
-            }
-
-            if (PropertyData.Count > 0)
-            {
-                returnString += outputSettings.TypePrefix + "PROPERTIES:" + Environment.NewLine;
-                foreach (var property in PropertyData)
-                {
-                    if (!(property.GetterAccessLevel.HasAvailabilityEqualToOrGreaterThan(
-                    outputSettings.ShowTypesAtOrAboveAccessLevel)
-                    || property.SetterAccessLevel.HasAvailabilityEqualToOrGreaterThan((
-                    outputSettings.ShowTypesAtOrAboveAccessLevel))))
-                    {
-                        continue;
-                    }
-                    returnString += property.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 

@@ -7,8 +7,10 @@ namespace Ntegrity.Models
 {
 	public class AssemblyInterfaceData
 	{
-        public readonly List<EnumInterfaceData> Enums = new List<EnumInterfaceData>(); 
-		public readonly List<TypeInterfaceData> Types = new List<TypeInterfaceData>();
+        public readonly List<ClassTypeData> Classes = new List<ClassTypeData>();
+        public readonly List<InterfaceTypeData> Interfaces = new List<InterfaceTypeData>();
+        public readonly List<EnumTypeData> Enums = new List<EnumTypeData>();
+        public readonly List<StructTypeData> Structs = new List<StructTypeData>();
 		public readonly Assembly Assembly;
 	    public readonly List<string> ReferencedAssemblies; 
 		public readonly string Name;
@@ -32,16 +34,25 @@ namespace Ntegrity.Models
                 var typeEnumValue = GetTypeEnumValueForType(type);
                 switch (typeEnumValue)
                 {
-                    case TypeEnum.Enum:
-                        Enums.Add(new EnumInterfaceData(type));
+                    case TypeEnum.Class:
+                        Classes.Add(new ClassTypeData(type));
                         break;
-                    default:
-                        Types.Add(new TypeInterfaceData(type));
+                    case TypeEnum.Interface:
+                        Interfaces.Add(new InterfaceTypeData(type));
+                        break;
+                    case TypeEnum.Enum:
+                        Enums.Add(new EnumTypeData(type));
+                        break;
+                    case TypeEnum.Struct:
+                        Structs.Add(new StructTypeData(type));
                         break;
                 }
             }
 
-            Types = Types.OrderBy(x => x.Name).ToList();
+            Classes = Classes.OrderBy(x => x.Name).ToList();
+            Interfaces = Interfaces.OrderBy(x => x.Name).ToList();
+            Enums = Enums.OrderBy(x => x.Name).ToList();
+            Structs = Structs.OrderBy(x => x.Name).ToList();
         }
 
 	    private TypeEnum GetTypeEnumValueForType(Type typeToAnalyze)
@@ -72,14 +83,14 @@ namespace Ntegrity.Models
         {
             var lines = humanReadableAssemblyInterface.Split(new [] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-            var assemblyLine = lines[1];
-            var versionLine = lines[2];
-            var clrVersionLine = lines[3];
+            var assemblyLine = lines[0];
+            var versionLine = lines[1];
+            var clrVersionLine = lines[2];
             Name = assemblyLine.Substring(AssemblyNamePrefix.Length);
             Version = versionLine.Substring(AssemblyVersionPrefix.Length);
             CLRVersion = clrVersionLine.Substring(CLRVersionPrefix.Length);
 
-            var i = 4;
+            var i = 3;
             if (String.Equals(lines[i], ReferencedAssembliesPrefix))
             {
                 i++;
@@ -105,9 +116,7 @@ namespace Ntegrity.Models
 
         public string GenerateHumanReadableInterfaceDefinition(NtegrityOutputSettings settings)
         {
-            var returnString = "This is a human readable representation of the interface for the assembly:" + Environment.NewLine;
-
-            returnString += AssemblyNamePrefix + Name + Environment.NewLine;
+            var returnString = AssemblyNamePrefix + Name + Environment.NewLine;
             returnString += AssemblyVersionPrefix + Version + Environment.NewLine;
             returnString += CLRVersionPrefix + CLRVersion + Environment.NewLine + Environment.NewLine;
 
@@ -119,8 +128,7 @@ namespace Ntegrity.Models
             }
             returnString += Environment.NewLine;
 
-            var classes = Types.Where(x => x.Type == TypeEnum.Class).OrderBy(x => x.Name);
-
+            var classes = Classes.OrderBy(x => x.Name);
             returnString += "CLASSES:" + Environment.NewLine;
             foreach (var classType in classes)
             {
@@ -131,9 +139,8 @@ namespace Ntegrity.Models
                 }
                 returnString += classType.ToString(settings) + Environment.NewLine;
             }
-            returnString += Environment.NewLine;
 
-            var interfaces = Types.Where(x => x.Type == TypeEnum.Interface).OrderBy(x => x.Name);
+            var interfaces = Interfaces.OrderBy(x => x.Name);
             returnString += "INTERFACES: " + Environment.NewLine;
             foreach (var interfaceType in interfaces)
             {
@@ -144,7 +151,6 @@ namespace Ntegrity.Models
                 }
                 returnString += interfaceType.ToString() + Environment.NewLine;
             }
-            returnString += Environment.NewLine;
 
             var enums = Enums.OrderBy(x => x.Name);
             returnString += "ENUMS: " + Environment.NewLine;
@@ -157,9 +163,8 @@ namespace Ntegrity.Models
                 }
                 returnString += enumType.ToString() + Environment.NewLine;
             }
-            returnString += Environment.NewLine;
 
-            var structs = Types.Where(x => x.Type == TypeEnum.Struct).OrderBy(x => x.Name);
+            var structs = Structs.OrderBy(x => x.Name);
             returnString += "STRUCTS: " + Environment.NewLine;
             foreach (var structType in structs)
             {

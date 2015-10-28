@@ -46,6 +46,7 @@
     <Compile Include="InternalEnum.cs" />
     <Compile Include="InternalStruct.cs" />
     <Compile Include="IPublicChildInterface.cs" />
+    <Compile Include="IPublicInterfaceWithAttributes.cs" />
     <Compile Include="PropertyTestClass.cs" />
     <Compile Include="PublicBaseClass.cs" />
     <Compile Include="ContainerClass.cs" />
@@ -58,9 +59,11 @@
     <Compile Include="PublicClassWithAttributes.cs" />
     <Compile Include="PublicClassWithPropertiesAndFields.cs" />
     <Compile Include="PublicEnum.cs" />
+    <Compile Include="PublicEnumWithAttributes.cs" />
     <Compile Include="PublicEnumWithValues.cs" />
     <Compile Include="PublicSealedClass.cs" />
     <Compile Include="PublicStruct.cs" />
+    <Compile Include="PublicStructWithAttributes.cs" />
     <Compile Include="StaticClass.cs" />
     <Compile Include="TestAttributeAttribute.cs" />
   </ItemGroup>

@@ -70,7 +70,7 @@ namespace Ntegrity.Test
         [Test]
         public void StringConstructor_ProperlyParsesOutput()
         {
-            var testInterfaceData = new AssemblyInterfaceData(typeof (PublicClass));
+            var testInterfaceData = new AssemblyInterfaceData(typeof(PublicClass));
             var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
 
             var SUT = new AssemblyInterfaceData(testString);
@@ -80,6 +80,38 @@ namespace Ntegrity.Test
             Assert.That(SUT.CLRVersion == testInterfaceData.CLRVersion);
             Assert.That(SUT.ReferencedAssemblies.Count == testInterfaceData.ReferencedAssemblies.Count);
             Assert.That(SUT.ReferencedAssemblies.All(x => testInterfaceData.ReferencedAssemblies.Any(y => y == x)));
+        }
+
+        [Test]
+        public void StringOutput_DoesNotHaveTwoSpaces()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(PublicClass));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+
+            Assert.That(!testString.Contains("  "));
+        }
+
+        [Test]
+        public void StringOutput_DoesNotHaveThreeNewlines()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(PublicClass));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+
+            Assert.That(!testString.Contains(Environment.NewLine + Environment.NewLine + Environment.NewLine));
+        }
+
+        [Ignore("This is the big one. Will take quite a bit of work to implement.")]
+        [Test]
+        public void StringOutput_GeneratedTwice_IsIdentical()
+        {
+            var testAssembly = new AssemblyInterfaceData(typeof(PublicClass));
+            var firstString = testAssembly.GenerateHumanReadableInterfaceDefinition();
+
+            var secondPass = new AssemblyInterfaceData(firstString);
+            var secondString = secondPass.GenerateHumanReadableInterfaceDefinition();
+
+            Assert.That(firstString.Length == secondString.Length);
+            Assert.That(firstString.Equals(secondString));
         }
     }
 }

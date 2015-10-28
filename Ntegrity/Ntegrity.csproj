@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,8 +50,10 @@
     <Compile Include="Models\MethodData.cs" />
     <Compile Include="Models\PropertyData.cs" />
     <Compile Include="Models\TypeEnum.cs" />
-    <Compile Include="Models\EnumInterfaceData.cs" />
-    <Compile Include="Models\TypeInterfaceData.cs" />
+    <Compile Include="Models\EnumTypeData.cs" />
+    <Compile Include="Models\StructTypeData.cs" />
+    <Compile Include="Models\InterfaceTypeData.cs" />
+    <Compile Include="Models\ClassTypeData.cs" />
     <Compile Include="NtegrityOutputSettings.cs" />
     <Compile Include="Ntegrity.cs" />
     <Compile Include="NtegrityException.cs" />

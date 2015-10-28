@@ -1,5 +1,4 @@
-﻿This is a human readable representation of the interface for the assembly:
-Assembly: Ntegrity.TestTargetAssembly
+﻿Assembly: Ntegrity.TestTargetAssembly
 Version: v1.0.0.0
 Targeting CLR Version: v4.0.30319
 
@@ -131,7 +130,6 @@ CLASSES:
 	FIELDS:
 		public System.String Text
 
-
 INTERFACES: 
 	internal interface Ntegrity.TestTargetAssembly.ContainerClass+INestedInternalInterface
 
@@ -149,6 +147,8 @@ INTERFACES:
 
 	public interface Ntegrity.TestTargetAssembly.IPublicInterface
 
+	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+	public interface Ntegrity.TestTargetAssembly.IPublicInterfaceWithAttributes
 
 ENUMS: 
 	internal enum Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalEnum
@@ -193,6 +193,13 @@ ENUMS:
 		System.IFormattable
 		System.IConvertible
 
+	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+	public enum Ntegrity.TestTargetAssembly.PublicEnumWithAttributes
+	IMPLEMENTS:
+		System.IComparable
+		System.IFormattable
+		System.IConvertible
+
 	public enum Ntegrity.TestTargetAssembly.PublicEnumWithValues
 	IMPLEMENTS:
 		System.IComparable
@@ -202,7 +209,6 @@ ENUMS:
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueOne
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueThree
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueTwo
-
 
 STRUCTS: 
 	internal struct Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalStruct
@@ -216,5 +222,8 @@ STRUCTS:
 	internal struct Ntegrity.TestTargetAssembly.InternalStruct
 
 	public struct Ntegrity.TestTargetAssembly.PublicStruct
+
+	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
+	public struct Ntegrity.TestTargetAssembly.PublicStructWithAttributes
 
 
