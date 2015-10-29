@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VersionTestAssembly
 {
-    public interface TestInterface2
+    public struct TestStruct3
     {
     }
 }

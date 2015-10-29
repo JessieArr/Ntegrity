@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VersionTestAssembly
 {
-    public enum TestEnum2
+    public enum TestEnum3
     {
     }
 }
