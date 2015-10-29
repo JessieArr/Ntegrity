@@ -33,7 +33,10 @@ namespace Ntegrity.Test
         public void BuildAssemblyInterfaceData_ForNUnit()
         {
             var testInterfaceData = new AssemblyInterfaceData(typeof(TestFixtureAttribute));
-            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition(new NtegrityOutputSettings()
+            {
+                ShowTypesAtOrAboveAccessLevel = AccessLevelEnum.Public
+            });
             File.WriteAllText("../../SampleOutput/NUnit.Interface.txt", testString);
         }
 
@@ -42,7 +45,10 @@ namespace Ntegrity.Test
         public void BuildAssemblyInterfaceData_ForEntityFramework()
         {
             var testInterfaceData = new AssemblyInterfaceData(typeof(System.Data.Entity.Database));
-            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition(new NtegrityOutputSettings()
+            {
+                ShowTypesAtOrAboveAccessLevel = AccessLevelEnum.Public
+            });
             File.WriteAllText("../../SampleOutput/EntityFramework.Interface.txt", testString);
         }
 

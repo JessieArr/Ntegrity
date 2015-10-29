@@ -94,6 +94,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutput\EntityFramework.Interface.txt" />
+    <Content Include="SampleOutput\NUnit.Interface.txt" />
     <Content Include="SampleT4Templates\Ntegrity.TestTargetAssembly.Interface.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
