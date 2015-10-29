@@ -13,6 +13,11 @@ CLASSES:
 	METHODS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		public Void PublicMethodWithAttributes()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 	PROPERTIES:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		Int32 PublicPropertyWithAttributes { public get; public set; }
@@ -23,42 +28,96 @@ CLASSES:
 	internal class Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	private class Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	protected class Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 	FIELDS:
 		public System.String test
 
 	internal abstract class Ntegrity.TestTargetAssembly.InternalAbstractClass
 	CONSTRUCTORS:
 		protected Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.InternalAttributeConstructorTestClass
 	CONSTRUCTORS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		internal Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	internal class Ntegrity.TestTargetAssembly.InternalClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PrivateAttributeConstructorTestClass
 	CONSTRUCTORS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		private Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PropertyTestClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 	PROPERTIES:
 		Int32 InternalProperty { internal get; internal set; }
 		Int32 PrivateProperty { private get; private set; }
@@ -69,17 +128,34 @@ CLASSES:
 	CONSTRUCTORS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		protected Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PublicAttributeConstructorTestClass
 	CONSTRUCTORS:
 		[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PublicBaseClass
 	CONSTRUCTORS:
 		public Void .ctor()
 	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
 		public Int32 PublicIntMethod()
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PublicChildClass
 	INHERITS:
@@ -90,22 +166,45 @@ CLASSES:
 	CONSTRUCTORS:
 		public Void .ctor()
 	METHODS:
-		public Int32 Ntegrity.TestTargetAssembly.PublicBaseClass.PublicIntMethod()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 Ntegrity.TestTargetAssemblyPublicBaseClass.PublicIntMethod()
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PublicClass
 	IMPLEMENTS:
 		Ntegrity.TestTargetAssembly.IPublicInterface
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 	public class Ntegrity.TestTargetAssembly.PublicClassWithAttributes
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public class Ntegrity.TestTargetAssembly.PublicClassWithPropertiesAndFields
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 	PROPERTIES:
 		Int32 IntProperty { public get; public set; }
 	FIELDS:
@@ -114,8 +213,20 @@ CLASSES:
 	public sealed class Ntegrity.TestTargetAssembly.PublicSealedClass
 	CONSTRUCTORS:
 		public Void .ctor()
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	public static class Ntegrity.TestTargetAssembly.StaticClass
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemObject.Equals(System.Object)
+		public Int32 SystemObject.GetHashCode()
+		public System.String SystemObject.ToString()
 
 	[System.AttributeUsageAttribute]
 	public class Ntegrity.TestTargetAssembly.TestAttributeAttribute
@@ -125,6 +236,16 @@ CLASSES:
 		System.Runtime.InteropServices._Attribute
 	CONSTRUCTORS:
 		public Void .ctor(System.String)
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemAttribute.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemAttribute.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public Boolean SystemAttribute.IsDefaultAttribute()
+		public Boolean SystemAttribute.Match(System.Object)
+		public System.String SystemObject.ToString()
 	PROPERTIES:
 		System.Object TypeId { public get; }
 	FIELDS:
@@ -156,42 +277,168 @@ ENUMS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	private enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	protected enum Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	public enum Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	public enum Ntegrity.TestTargetAssembly.ContainerClass+TestEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	internal enum Ntegrity.TestTargetAssembly.InternalEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	public enum Ntegrity.TestTargetAssembly.PublicEnum
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 	public enum Ntegrity.TestTargetAssembly.PublicEnumWithAttributes
@@ -199,12 +446,48 @@ ENUMS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 
 	public enum Ntegrity.TestTargetAssembly.PublicEnumWithValues
 	IMPLEMENTS:
 		System.IComparable
 		System.IFormattable
 		System.IConvertible
+	METHODS:
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.IFormatProvider)
+		[System.ObsoleteAttribute]
+		public System.String SystemEnum.ToString(System.String, System.IFormatProvider)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemEnum.HasFlag(System.Enum)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.CompareTo(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemEnum.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemEnum.ToString()
+		public System.String SystemEnum.ToString(System.String)
+		public System.TypeCode SystemEnum.GetTypeCode()
 	FIELDS:
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueOne
 		public Ntegrity.TestTargetAssembly.PublicEnumWithValues ValueThree
@@ -212,18 +495,74 @@ ENUMS:
 
 STRUCTS: 
 	internal struct Ntegrity.TestTargetAssembly.ContainerClass+NestedInternalStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	private struct Ntegrity.TestTargetAssembly.ContainerClass+NestedPrivateStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	protected struct Ntegrity.TestTargetAssembly.ContainerClass+NestedProtectedStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	public struct Ntegrity.TestTargetAssembly.ContainerClass+NestedPublicStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	internal struct Ntegrity.TestTargetAssembly.InternalStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	public struct Ntegrity.TestTargetAssembly.PublicStruct
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 	[Ntegrity.TestTargetAssembly.TestAttributeAttribute]
 	public struct Ntegrity.TestTargetAssembly.PublicStructWithAttributes
+	METHODS:
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Boolean SystemValueType.Equals(System.Object)
+		[System.Security.SecuritySafeCriticalAttribute]
+		public Int32 SystemValueType.GetHashCode()
+		[System.Security.SecuritySafeCriticalAttribute]
+		public System.Type SystemObject.GetType()
+		public System.String SystemValueType.ToString()
 
 

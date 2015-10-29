@@ -28,6 +28,24 @@ namespace Ntegrity.Test
             File.WriteAllText("../../SampleOutput/TestTargetAssembly.Interface.txt", readable);
         }
 
+        [Explicit]
+        [Test]
+        public void BuildAssemblyInterfaceData_ForNUnit()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(TestFixtureAttribute));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+            File.WriteAllText("../../SampleOutput/NUnit.Interface.txt", testString);
+        }
+
+        [Explicit]
+        [Test]
+        public void BuildAssemblyInterfaceData_ForEntityFramework()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(System.Data.Entity.Database));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+            File.WriteAllText("../../SampleOutput/EntityFramework.Interface.txt", testString);
+        }
+
         [Test]
         public void BuildAssemblyInterfaceData_ExcludePrivate_ReturnsNoPrivateFields()
         {
@@ -98,6 +116,20 @@ namespace Ntegrity.Test
             var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
 
             Assert.That(!testString.Contains(Environment.NewLine + Environment.NewLine + Environment.NewLine));
+        }
+
+        [Test]
+        public void StringOutput_ForNUnit_DoesNotThrow()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(TestFixtureAttribute));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
+        }
+
+        [Test]
+        public void StringOutput_ForEntityFramework_DoesNotThrow()
+        {
+            var testInterfaceData = new AssemblyInterfaceData(typeof(System.Data.Entity.Database));
+            var testString = testInterfaceData.GenerateHumanReadableInterfaceDefinition();
         }
 
         [Ignore("This is the big one. Will take quite a bit of work to implement.")]

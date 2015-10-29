@@ -135,7 +135,7 @@ namespace Ntegrity.Models
 
         private void CollectAttributeData(Type typeToAnalyze)
 		{
-			var attributes = typeToAnalyze.GetCustomAttributes(true).OrderBy(x => x);
+			var attributes = typeToAnalyze.GetCustomAttributes(true);
 
 			foreach (var attribute in attributes)
 			{

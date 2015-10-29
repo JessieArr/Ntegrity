@@ -44,13 +44,19 @@ namespace Ntegrity.Models
             if (methodInfo.DeclaringType.FullName != methodInfo.ReflectedType.FullName)
             {
                 IsInherited = true;
-                DeclaringType = methodInfo.DeclaringType.FullName;
+                DeclaringType = methodInfo.DeclaringType.Namespace + methodInfo.DeclaringType.Name;
+                
             }
 
             var attributes = methodInfo.GetCustomAttributes();
             foreach (var attribute in attributes)
             {
                 AttributeData.Add(new AttributeData(attribute));
+            }
+            if (DeclaringType == null && IsInherited)
+            {
+                var x = 5;
+                x++;
             }
         }
 
