@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInterfaceDataTests.cs" />
     <Compile Include="InterfaceTypeDataTests.cs" />
+    <Compile Include="NtegrityAssemblyDiffTests.cs" />
     <Compile Include="StructTypeDataTests.cs" />
     <Compile Include="EnumTypeDataTests.cs" />
     <Compile Include="ConstructorDataTests.cs" />
@@ -94,12 +95,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SampleOutput\AssemblyVersionDiff.txt" />
     <Content Include="SampleOutput\EntityFramework.Interface.txt" />
     <Content Include="SampleOutput\NUnit.Interface.txt" />
     <Content Include="SampleT4Templates\Ntegrity.TestTargetAssembly.Interface.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Ntegrity.TestTargetAssembly.tt</DependentUpon>
+    </Content>
+    <Content Include="TestAssemblyVersions\VersionTestAssembly.1.0.0.0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestAssemblyVersions\VersionTestAssembly.2.0.0.0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="SampleT4Templates\Ntegrity.TestTargetAssembly.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -108,9 +116,7 @@
     <Content Include="SampleOutput\TestTargetAssembly.Interface.txt" />
     <Content Include="SampleOutput\TestTargetAssembly_NoPrivates.Interface.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestAssemblyVersions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

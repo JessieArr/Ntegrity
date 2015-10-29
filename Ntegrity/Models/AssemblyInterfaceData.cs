@@ -17,9 +17,9 @@ namespace Ntegrity.Models
 		public readonly string Version;
 		public readonly string CLRVersion;
 
-        public AssemblyInterfaceData(Type typeInAssemblyToAnalyze)
-        {
-            Assembly = typeInAssemblyToAnalyze.Assembly;
+	    public AssemblyInterfaceData(Assembly assemblyToAnalyze)
+	    {
+            Assembly = assemblyToAnalyze;
 
             Name = Assembly.GetName().Name;
             Version = "v" + Assembly.GetName().Version;
@@ -53,6 +53,10 @@ namespace Ntegrity.Models
             Interfaces = Interfaces.OrderBy(x => x.Name).ToList();
             Enums = Enums.OrderBy(x => x.Name).ToList();
             Structs = Structs.OrderBy(x => x.Name).ToList();
+        }
+
+        public AssemblyInterfaceData(Type typeInAssemblyToAnalyze) : this(typeInAssemblyToAnalyze.Assembly)
+        {
         }
 
 	    private TypeEnum GetTypeEnumValueForType(Type typeToAnalyze)

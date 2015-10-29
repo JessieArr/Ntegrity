@@ -1,0 +1,27 @@
+Diff of Upgrade from Assembly: VersionTestAssembly v1.0.0.0
+To Assembly: VersionTestAssembly v2.0.0.0
+
+REMOVED CLASSES:
+	VersionTestAssembly.TestClass2
+
+ADDED CLASSES:
+	VersionTestAssembly.TestClass3
+
+REMOVED INTERFACES:
+	VersionTestAssembly.TestInterface2
+
+ADDED INTERFACES:
+	VersionTestAssembly.TestInterface3
+
+REMOVED STRUCTS:
+	VersionTestAssembly.TestStruct2
+
+ADDED STRUCTS:
+	VersionTestAssembly.TestStruct3
+
+REMOVED ENUMS:
+	VersionTestAssembly.TestEnum2
+
+ADDED ENUMS:
+	VersionTestAssembly.TestEnum3
+
