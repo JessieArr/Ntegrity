@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Ntegrity</id>
-	<version>0.5.2.0</version>
+	<version>0.5.3.0</version>
     <authors>Shawn Morrison</authors>
     <title>Ntegrity</title>
     <description>A handy tool for managing the public interface of your .NET libraries.</description>
