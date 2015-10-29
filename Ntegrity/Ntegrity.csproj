@@ -54,6 +54,7 @@
     <Compile Include="Models\StructTypeData.cs" />
     <Compile Include="Models\InterfaceTypeData.cs" />
     <Compile Include="Models\ClassTypeData.cs" />
+    <Compile Include="NtegrityAssemblyDiff.cs" />
     <Compile Include="NtegrityOutputSettings.cs" />
     <Compile Include="Ntegrity.cs" />
     <Compile Include="NtegrityException.cs" />
