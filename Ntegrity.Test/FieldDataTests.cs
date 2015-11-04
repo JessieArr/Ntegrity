@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models;
+using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 
@@ -15,7 +16,7 @@ namespace Ntegrity.Test
         [Test]
         public void PublicFieldAccessLevel_IsPublic()
         {
-            var field = typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes");
+            var field = new FieldInfoWrapper(typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes"));
             var SUT = new FieldData(field);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
         }
@@ -23,7 +24,7 @@ namespace Ntegrity.Test
         [Test]
         public void FieldWithAttributes_HasAttributes()
         {
-            var field = typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes");
+            var field = new FieldInfoWrapper(typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes"));
             var SUT = new FieldData(field);
             Assert.That(SUT.AttributeData.Count > 0);
             Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
@@ -64,7 +65,7 @@ namespace Ntegrity.Test
         [Test]
         public void FieldWithAttributesFromString_HasAttributes()
         {
-            var field = typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes");
+            var field = new FieldInfoWrapper(typeof(ContainerClass).GetFields().Single(x => x.Name == "PublicFieldWithAttributes"));
             var testFieldData = new FieldData(field);
 
             var testString = testFieldData.ToString();

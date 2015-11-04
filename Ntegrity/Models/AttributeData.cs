@@ -1,4 +1,5 @@
 ﻿using System;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -7,7 +8,7 @@ namespace Ntegrity.Models
 		public readonly string Name;
 	    public bool IsCompilerGenerated;
 
-        public AttributeData(Attribute attribute)
+        public AttributeData(IAttributeWrapper attribute)
         {
             Name = attribute.ToString();
             var attributeParts = Name.Split();

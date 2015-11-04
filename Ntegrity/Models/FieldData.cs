@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -10,7 +11,7 @@ namespace Ntegrity.Models
         public readonly AccessLevelEnum AccessLevel;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
-        public FieldData(FieldInfo fieldInfo)
+        public FieldData(IFieldInfoWrapper fieldInfo)
         {
             FieldSignature = fieldInfo.ToString();
             if (fieldInfo.IsPrivate)

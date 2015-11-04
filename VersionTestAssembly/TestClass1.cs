@@ -8,5 +8,7 @@ namespace VersionTestAssembly
 {
     public class TestClass1
     {
+        public int Int1;
+        public int Int2;
     }
 }

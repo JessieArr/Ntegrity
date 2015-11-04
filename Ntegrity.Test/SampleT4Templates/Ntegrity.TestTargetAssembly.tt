@@ -6,13 +6,14 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Ntegrity" #>
 <#@ import namespace="Ntegrity.Models" #>
+<#@ import namespace="Ntegrity.Models.Reflection" #>
 <#@ import namespace="Ntegrity.TestTargetAssembly" #>
 <#@ output extension="Interface.txt" #>
 <#@ assembly name="bin\Debug\Ntegrity.dll" #>
 <#@ assembly name="bin\Debug\Ntegrity.TestTargetAssembly.dll" #>
 <#
 	// This works on save/run custom tool.
-	Write(new AssemblyInterfaceData(typeof(PublicClass)).GenerateHumanReadableInterfaceDefinition());
+	//Write(new AssemblyInterfaceData(new AssemblyWrapper(typeof(PublicClass).Assembly)).GenerateHumanReadableInterfaceDefinition());
 	var x = "Test";
 #>
 

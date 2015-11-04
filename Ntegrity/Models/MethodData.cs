@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -13,7 +14,7 @@ namespace Ntegrity.Models
         public readonly AccessLevelEnum AccessLevel;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
-        public MethodData(MethodInfo methodInfo)
+        public MethodData(IMethodInfoWrapper methodInfo)
         {
             var methodString = methodInfo.ToString();
             var splitIndex = methodString.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
@@ -45,18 +46,12 @@ namespace Ntegrity.Models
             {
                 IsInherited = true;
                 DeclaringType = methodInfo.DeclaringType.Namespace + methodInfo.DeclaringType.Name;
-                
             }
 
             var attributes = methodInfo.GetCustomAttributes();
             foreach (var attribute in attributes)
             {
                 AttributeData.Add(new AttributeData(attribute));
-            }
-            if (DeclaringType == null && IsInherited)
-            {
-                var x = 5;
-                x++;
             }
         }
 

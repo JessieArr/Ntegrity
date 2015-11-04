@@ -8,5 +8,8 @@ namespace VersionTestAssembly
 {
     public enum TestEnum1
     {
+        ValueOne,
+        ValueTwo,
+        ValueThree
     }
 }

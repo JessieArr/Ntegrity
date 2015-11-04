@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models;
+using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 
@@ -15,7 +16,7 @@ namespace Ntegrity.Test
         [Test]
         public void PublicPropertyAccessLevel_IsPublic()
         {
-            var property = typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes");
+            var property = new PropertyInfoWrapper(typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes"));
             var SUT = new PropertyData(property);
             Assert.That(SUT.GetterAccessLevel == AccessLevelEnum.Public);
         }
@@ -23,7 +24,7 @@ namespace Ntegrity.Test
         [Test]
         public void PropertyWithAttributes_HasAttributes()
         {
-            var property = typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes");
+            var property = new PropertyInfoWrapper(typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes"));
             var SUT = new PropertyData(property);
             Assert.That(SUT.AttributeData.Count > 0);
             Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
@@ -64,7 +65,7 @@ namespace Ntegrity.Test
         [Test]
         public void PropertyWithAttributesFromString_HasAttributes()
         {
-            var property = typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes");
+            var property = new PropertyInfoWrapper(typeof(ContainerClass).GetProperties().Single(x => x.Name == "PublicPropertyWithAttributes"));
             var testPropertyData = new PropertyData(property);
 
             var testString = testPropertyData.ToString();

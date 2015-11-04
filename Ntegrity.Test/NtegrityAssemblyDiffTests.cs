@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models;
+using Ntegrity.Models.Reflection;
 using NUnit.Framework;
 
 namespace Ntegrity.Test
@@ -19,12 +20,12 @@ namespace Ntegrity.Test
         {
             var currentDirectory = Directory.GetCurrentDirectory();
 
-            var v1Assembly = Assembly.LoadFile(currentDirectory
-                + "\\TestAssemblyVersions\\VersionTestAssembly.1.0.0.0.dll");
+            var v1Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory
+                + "\\TestAssemblyVersions\\VersionTestAssembly.1.0.0.0.dll"));
             var v1AssemblyInterfaceData = new AssemblyInterfaceData(v1Assembly);
 
-            var v2Assembly = Assembly.LoadFile(currentDirectory
-                + "\\TestAssemblyVersions\\VersionTestAssembly.2.0.0.0.dll");
+            var v2Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory
+                + "\\TestAssemblyVersions\\VersionTestAssembly.2.0.0.0.dll"));
             var v2AssemblyInterfaceData = new AssemblyInterfaceData(v2Assembly);
 
             var SUT = new NtegrityAssemblyDiff(v1AssemblyInterfaceData, v2AssemblyInterfaceData);
@@ -38,12 +39,12 @@ namespace Ntegrity.Test
         {
             var currentDirectory = Directory.GetCurrentDirectory();
 
-            var v1Assembly = Assembly.LoadFile(currentDirectory 
-                + "\\TestAssemblyVersions\\VersionTestAssembly.1.0.0.0.dll");
+            var v1Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory 
+                + "\\TestAssemblyVersions\\VersionTestAssembly.1.0.0.0.dll"));
             var v1AssemblyInterfaceData = new AssemblyInterfaceData(v1Assembly);
 
-            var v2Assembly = Assembly.LoadFile(currentDirectory
-                + "\\TestAssemblyVersions\\VersionTestAssembly.2.0.0.0.dll");
+            var v2Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory
+                + "\\TestAssemblyVersions\\VersionTestAssembly.2.0.0.0.dll"));
             var v2AssemblyInterfaceData = new AssemblyInterfaceData(v2Assembly);
 
             var SUT = new NtegrityAssemblyDiff(v1AssemblyInterfaceData, v2AssemblyInterfaceData);

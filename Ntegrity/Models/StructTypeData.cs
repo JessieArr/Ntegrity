@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -23,7 +24,7 @@ namespace Ntegrity.Models
         public readonly string InheritsFrom;
         public readonly List<string> ImplementsInterfaces;
 
-        public StructTypeData(Type typeToAnalyze)
+        public StructTypeData(ITypeWrapper typeToAnalyze)
 		{
 			Name = typeToAnalyze.FullName;
 
@@ -66,19 +67,19 @@ namespace Ntegrity.Models
 			IsStatic = IsSealed && IsAbstract;
 
 			CollectAttributeData(typeToAnalyze);
-            AttributeData = AttributeData.OrderBy(x => x.ToString()).ToList();
+            AttributeData = AttributeData.OrderBy(x => x.Name).ToList();
 
             CollectConstructorData(typeToAnalyze);
-            ConstructorData = ConstructorData.OrderBy(x => x.ToString()).ToList();
+            ConstructorData = ConstructorData.OrderBy(x => x.ConstructorSignature).ToList();
 
             CollectMethodData(typeToAnalyze);
-            MethodData = MethodData.OrderBy(x => x.ToString()).ToList();
+            MethodData = MethodData.OrderBy(x => x.MethodSignature).ToList();
 
             CollectPropertyData(typeToAnalyze);
-            PropertyData = PropertyData.OrderBy(x => x.ToString()).ToList();
+            PropertyData = PropertyData.OrderBy(x => x.PropertySignature).ToList();
 
             CollectFieldData(typeToAnalyze);
-            FieldData = FieldData.OrderBy(x => x.ToString()).ToList();
+            FieldData = FieldData.OrderBy(x => x.FieldSignature).ToList();
 
             if (typeToAnalyze.BaseType != null 
                 && typeToAnalyze.BaseType.FullName != "System.Object"
@@ -133,17 +134,18 @@ namespace Ntegrity.Models
             Type = TypeEnum.Struct;
         }
 
-        private void CollectAttributeData(Type typeToAnalyze)
+        private void CollectAttributeData(ITypeWrapper typeToAnalyze)
 		{
 			var attributes = typeToAnalyze.GetCustomAttributes(true);
 
 			foreach (var attribute in attributes)
 			{
-				AttributeData.Add(new AttributeData((Attribute)attribute));
+                var wrappedAttribute = new AttributeWrapper((Attribute)attribute);
+				AttributeData.Add(new AttributeData(wrappedAttribute));
 			}
 		}
 
-        private void CollectConstructorData(Type typeToAnalyze)
+        private void CollectConstructorData(ITypeWrapper typeToAnalyze)
         {
             var constructors = typeToAnalyze.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
@@ -153,7 +155,7 @@ namespace Ntegrity.Models
             }
         }
 
-        private void CollectMethodData(Type typeToAnalyze)
+        private void CollectMethodData(ITypeWrapper typeToAnalyze)
         {
             var methods = typeToAnalyze.GetMethods();
 
@@ -168,7 +170,7 @@ namespace Ntegrity.Models
             }
         }
 
-        private void CollectPropertyData(Type typeToAnalyze)
+        private void CollectPropertyData(ITypeWrapper typeToAnalyze)
         {
             var properties = typeToAnalyze.GetProperties(
                 BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
@@ -179,7 +181,7 @@ namespace Ntegrity.Models
             }
         }
 
-        private void CollectFieldData(Type typeToAnalyze)
+        private void CollectFieldData(ITypeWrapper typeToAnalyze)
         {
             var fields = typeToAnalyze.GetFields();
 

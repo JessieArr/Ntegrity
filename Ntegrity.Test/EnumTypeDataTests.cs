@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Ntegrity.Models;
+using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 
@@ -17,14 +18,14 @@ namespace Ntegrity.Test
 		[Test]
 		public void Constructor_IdentifiesClassTypesCorrectly()
 		{
-			var SUT = new EnumTypeData(typeof(PublicEnum));
+			var SUT = new EnumTypeData(new TypeWrapper(typeof(PublicEnum)));
 			Assert.That(SUT.Type == TypeEnum.Enum);
 		}
 
         [Test]
         public void Constructor_IdentifiesClass_PublicAccessCorrectly()
         {
-            var SUT = new EnumTypeData(typeof(PublicEnum));
+            var SUT = new EnumTypeData(new TypeWrapper(typeof(PublicEnum)));
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
             Assert.That(SUT.Type == TypeEnum.Enum);
         }
@@ -32,7 +33,7 @@ namespace Ntegrity.Test
         [Test]
         public void Constructor_IdentifiesClass_InternalAccessCorrectly()
         {
-            var internalEnum = typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "InternalEnum");
+            var internalEnum = new TypeWrapper(typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "InternalEnum"));
             var SUT = new EnumTypeData(internalEnum);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Internal);
         }
@@ -40,7 +41,7 @@ namespace Ntegrity.Test
         [Test]
         public void Constructor_IdentifiesClass_NestedPrivateAccessCorrectly()
         {
-            var internalClass = typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedPrivateEnum");
+            var internalClass = new TypeWrapper(typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedPrivateEnum"));
             var SUT = new EnumTypeData(internalClass);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Private);
         }
@@ -48,7 +49,7 @@ namespace Ntegrity.Test
         [Test]
         public void Constructor_IdentifiesStruct_NestedProtectedAccessCorrectly()
         {
-            var internalStruct = typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedProtectedEnum");
+            var internalStruct = new TypeWrapper(typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedProtectedEnum"));
             var SUT = new EnumTypeData(internalStruct);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Protected);
         }
@@ -56,7 +57,7 @@ namespace Ntegrity.Test
         [Test]
         public void Constructor_IdentifiesStruct_NestedInternalAccessCorrectly()
         {
-            var internalStruct = typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedInternalEnum");
+            var internalStruct = new TypeWrapper(typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedInternalEnum"));
             var SUT = new EnumTypeData(internalStruct);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Internal);
         }
@@ -64,7 +65,7 @@ namespace Ntegrity.Test
         [Test]
         public void Constructor_IdentifiesStruct_NestedPublicAccessCorrectly()
         {
-            var internalEnum = typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedPublicEnum");
+            var internalEnum = new TypeWrapper(typeof(PublicStruct).Assembly.DefinedTypes.Single(x => x.Name == "NestedPublicEnum"));
             var SUT = new EnumTypeData(internalEnum);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
             Assert.That(SUT.Type == TypeEnum.Enum);
@@ -73,7 +74,7 @@ namespace Ntegrity.Test
 		[Test]
 		public void ToString_BuildsCorrectString_ForPublicEnum()
 		{
-			var SUT = new EnumTypeData(typeof(PublicEnum));
+			var SUT = new EnumTypeData(new TypeWrapper(typeof(PublicEnum)));
 			var stringRepresentation = SUT.ToString();
 			Assert.That(stringRepresentation.StartsWith("\tpublic enum Ntegrity.TestTargetAssembly.PublicEnum"));
 		}
@@ -81,7 +82,7 @@ namespace Ntegrity.Test
 	    [Test]
 	    public void Constructor_Parses_ClassStringInput()
 	    {
-	        var testType = new EnumTypeData(typeof(PublicEnumWithAttributes));
+	        var testType = new EnumTypeData(new TypeWrapper(typeof(PublicEnumWithAttributes)));
 	        var testString = testType.ToString();
 
             var SUT = new EnumTypeData(testString);

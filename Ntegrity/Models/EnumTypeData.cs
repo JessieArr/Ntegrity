@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -17,7 +18,7 @@ namespace Ntegrity.Models
         public readonly List<FieldData> FieldData = new List<FieldData>();
         public readonly List<string> ImplementsInterfaces;
 
-        public EnumTypeData(Type typeToAnalyze)
+        public EnumTypeData(ITypeWrapper typeToAnalyze)
 		{
             if (!typeToAnalyze.IsEnum)
 			{
@@ -56,13 +57,13 @@ namespace Ntegrity.Models
 			}
 
 			CollectAttributeData(typeToAnalyze);
-            AttributeData = AttributeData.OrderBy(x => x.ToString()).ToList();
+            AttributeData = AttributeData.OrderBy(x => x.Name).ToList();
 
             CollectMethodData(typeToAnalyze);
-            MethodData = MethodData.OrderBy(x => x.ToString()).ToList();
+            MethodData = MethodData.OrderBy(x => x.MethodSignature).ToList();
 
             CollectFieldData(typeToAnalyze);
-            FieldData = FieldData.OrderBy(x => x.ToString()).ToList();
+            FieldData = FieldData.OrderBy(x => x.FieldSignature).ToList();
             
             ImplementsInterfaces = typeToAnalyze.GetInterfaces().Select(x => x.FullName).ToList();
         }
@@ -109,17 +110,18 @@ namespace Ntegrity.Models
             Type = TypeEnum.Enum;
         }
 
-        private void CollectAttributeData(Type typeToAnalyze)
+        private void CollectAttributeData(ITypeWrapper typeToAnalyze)
 		{
 			var attributes = typeToAnalyze.GetCustomAttributes(true);
 
 			foreach (var attribute in attributes)
 			{
-				AttributeData.Add(new AttributeData((Attribute)attribute));
+                var wrappedAttribute = new AttributeWrapper((Attribute)attribute);
+				AttributeData.Add(new AttributeData(wrappedAttribute));
 			}
 		}
 
-        private void CollectMethodData(Type typeToAnalyze)
+        private void CollectMethodData(ITypeWrapper typeToAnalyze)
         {
             var methods = typeToAnalyze.GetMethods();
 
@@ -134,7 +136,7 @@ namespace Ntegrity.Models
             }
         }
 
-        private void CollectFieldData(Type typeToAnalyze)
+        private void CollectFieldData(ITypeWrapper typeToAnalyze)
         {
             var fields = typeToAnalyze.GetFields();
 
@@ -208,7 +210,7 @@ namespace Ntegrity.Models
                     {
                         continue;
                     }
-                    returnString += method.ToString() + Environment.NewLine;
+                    returnString += method.ToString(outputSettings) + Environment.NewLine;
                 }
             }
 

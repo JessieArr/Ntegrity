@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models;
+using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 
@@ -16,7 +17,7 @@ namespace Ntegrity.Test
         [Test]
         public void PublicConstructorAccessLevel_IsPublic()
         {
-            var constructor = typeof(PublicClass).GetConstructors().First();
+            var constructor = new ConstructorInfoWrapper(typeof(PublicClass).GetConstructors().First());
             var SUT = new ConstructorData(constructor);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Public);
         }
@@ -24,7 +25,7 @@ namespace Ntegrity.Test
         [Test]
         public void PrivateConstructorAccessLevel_IsPublic()
         {
-            var constructor = typeof(PrivateAttributeConstructorTestClass).GetConstructors(BindingFlags.NonPublic|BindingFlags.Instance).First();
+            var constructor = new ConstructorInfoWrapper(typeof(PrivateAttributeConstructorTestClass).GetConstructors(BindingFlags.NonPublic|BindingFlags.Instance).First());
             var SUT = new ConstructorData(constructor);
             Assert.That(SUT.AccessLevel == AccessLevelEnum.Private);
         }
@@ -32,7 +33,7 @@ namespace Ntegrity.Test
         [Test]
         public void ConstructorWithAttributes_HasAttributes()
         {
-            var constructor = typeof(PublicAttributeConstructorTestClass).GetConstructors().First();
+            var constructor = new ConstructorInfoWrapper(typeof(PublicAttributeConstructorTestClass).GetConstructors().First());
             var SUT = new ConstructorData(constructor);
             Assert.That(SUT.AttributeData.Count > 0);
             Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
@@ -73,7 +74,7 @@ namespace Ntegrity.Test
         [Test]
         public void ConstructorWithAttributesFromString_HasAttributes()
         {
-            var constructor = typeof(PublicAttributeConstructorTestClass).GetConstructors().First();
+            var constructor = new ConstructorInfoWrapper(typeof(PublicAttributeConstructorTestClass).GetConstructors().First());
             var testConstructorData = new ConstructorData(constructor);
 
             var testString = testConstructorData.ToString();

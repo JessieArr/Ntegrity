@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -13,7 +14,7 @@ namespace Ntegrity.Models
         public readonly bool HasSetter;
         public readonly List<AttributeData> AttributeData = new List<AttributeData>();
 
-        public PropertyData(PropertyInfo propertyInfo)
+        public PropertyData(IPropertyInfoWrapper propertyInfo)
         {
             PropertySignature = propertyInfo.ToString();
 

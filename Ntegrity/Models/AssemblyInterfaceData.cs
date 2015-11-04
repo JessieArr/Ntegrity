@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ntegrity.Models.Reflection;
 
 namespace Ntegrity.Models
 {
@@ -11,13 +12,13 @@ namespace Ntegrity.Models
         public readonly List<InterfaceTypeData> Interfaces = new List<InterfaceTypeData>();
         public readonly List<EnumTypeData> Enums = new List<EnumTypeData>();
         public readonly List<StructTypeData> Structs = new List<StructTypeData>();
-		public readonly Assembly Assembly;
+		public readonly IAssemblyWrapper Assembly;
 	    public readonly List<string> ReferencedAssemblies; 
 		public readonly string Name;
 		public readonly string Version;
 		public readonly string CLRVersion;
 
-	    public AssemblyInterfaceData(Assembly assemblyToAnalyze)
+	    public AssemblyInterfaceData(IAssemblyWrapper assemblyToAnalyze)
 	    {
             Assembly = assemblyToAnalyze;
 
@@ -55,11 +56,11 @@ namespace Ntegrity.Models
             Structs = Structs.OrderBy(x => x.Name).ToList();
         }
 
-        public AssemblyInterfaceData(Type typeInAssemblyToAnalyze) : this(typeInAssemblyToAnalyze.Assembly)
+        public AssemblyInterfaceData(Type typeInAssemblyToAnalyze) : this(new AssemblyWrapper(typeInAssemblyToAnalyze.Assembly))
         {
         }
 
-	    private TypeEnum GetTypeEnumValueForType(Type typeToAnalyze)
+	    private TypeEnum GetTypeEnumValueForType(ITypeWrapper typeToAnalyze)
 	    {
             if (typeToAnalyze.IsClass)
             {

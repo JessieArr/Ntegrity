@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models;
+using Ntegrity.Models.Diff;
 
 namespace Ntegrity
 {
@@ -23,6 +24,7 @@ namespace Ntegrity
 
         public List<EnumTypeData> AddedEnums = new List<EnumTypeData>();
         public List<EnumTypeData> RemovedEnums = new List<EnumTypeData>();
+        public List<EnumTypeDiff> ModifiedEnums = new List<EnumTypeDiff>();
 
         public NtegrityAssemblyDiff(AssemblyInterfaceData oldAssembly, AssemblyInterfaceData newAssembly)
         {
@@ -97,13 +99,28 @@ namespace Ntegrity
                     RemovedEnums.Add(oldEnum);
                 }
             }
-            foreach (var oldEnum in newAssembly.Enums)
+            foreach (var newEnum in newAssembly.Enums)
             {
-                if (oldAssembly.Enums.All(x => x.Name != oldEnum.Name))
+                if (oldAssembly.Enums.All(x => x.Name != newEnum.Name))
                 {
-                    AddedEnums.Add(oldEnum);
+                    AddedEnums.Add(newEnum);
                 }
             }
+            foreach (var oldModifiedEnum in oldAssembly.Enums)
+            {
+                var newModifiedEnum = newAssembly.Enums.FirstOrDefault(
+                    x => x.Name == oldModifiedEnum.Name);
+                if (newModifiedEnum == null)
+                {
+                    continue;
+                }
+                ModifiedEnums.Add(new EnumTypeDiff(oldModifiedEnum, newModifiedEnum));
+            }
+        }
+
+        public override string ToString()
+        {
+            return ToString(new NtegrityOutputSettings());
         }
 
         private const string FromAssemblyPrefix = "Diff of Upgrade from Assembly: ";
@@ -116,7 +133,8 @@ namespace Ntegrity
         private const string AddedStructsPrefix = "ADDED STRUCTS:";
         private const string RemovedEnumsPrefix = "REMOVED ENUMS:";
         private const string AddedEnumsPrefix = "ADDED ENUMS:";
-        public override string ToString()
+        private const string ChangedEnumsPrefix = "CHANGED ENUMS:";
+        public string ToString(NtegrityOutputSettings outputSettings)
         {
             var returnString = FromAssemblyPrefix + OldAssembly.Name + " " + OldAssembly.Version;
             returnString += Environment.NewLine;
@@ -127,14 +145,14 @@ namespace Ntegrity
             returnString += RemovedClassesPrefix + Environment.NewLine;
             foreach (var removedClass in RemovedClasses)
             {
-                returnString += "\t" + removedClass.Name + Environment.NewLine;
+                returnString += "-\t" + removedClass.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
             returnString += AddedClassesPrefix + Environment.NewLine;
             foreach (var addedClass in AddedClasses)
             {
-                returnString += "\t" + addedClass.Name + Environment.NewLine;
+                returnString += "+\t" + addedClass.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -142,14 +160,14 @@ namespace Ntegrity
             returnString += RemovedInterfacesPrefix + Environment.NewLine;
             foreach (var removedInterface in RemovedInterfaces)
             {
-                returnString += "\t" + removedInterface.Name + Environment.NewLine;
+                returnString += "-\t" + removedInterface.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
             returnString += AddedInterfacesPrefix + Environment.NewLine;
             foreach (var addedInterface in AddedInterfaces)
             {
-                returnString += "\t" + addedInterface.Name + Environment.NewLine;
+                returnString += "+\t" + addedInterface.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -157,14 +175,14 @@ namespace Ntegrity
             returnString += RemovedStructsPrefix + Environment.NewLine;
             foreach (var removedStruct in RemovedStructs)
             {
-                returnString += "\t" + removedStruct.Name + Environment.NewLine;
+                returnString += "-\t" + removedStruct.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
             returnString += AddedStructsPrefix + Environment.NewLine;
             foreach (var addedStruct in AddedStructs)
             {
-                returnString += "\t" + addedStruct.Name + Environment.NewLine;
+                returnString += "+\t" + addedStruct.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
@@ -172,14 +190,22 @@ namespace Ntegrity
             returnString += RemovedEnumsPrefix + Environment.NewLine;
             foreach (var removedEnum in RemovedEnums)
             {
-                returnString += "\t" + removedEnum.Name + Environment.NewLine;
+                returnString += "-\t" + removedEnum.Name + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
             returnString += AddedEnumsPrefix + Environment.NewLine;
             foreach (var addedEnum in AddedEnums)
             {
-                returnString += "\t" + addedEnum.Name + Environment.NewLine;
+                returnString += "+\t" + addedEnum.Name + Environment.NewLine;
+            }
+            returnString += Environment.NewLine;
+
+            var changedEnums = ModifiedEnums.Where(x => x.HasChanged);
+            returnString += ChangedEnumsPrefix + Environment.NewLine;
+            foreach (var changedEnum in changedEnums)
+            {
+                returnString += "+\t" + changedEnum.ToString() + Environment.NewLine;
             }
             returnString += Environment.NewLine;
 
