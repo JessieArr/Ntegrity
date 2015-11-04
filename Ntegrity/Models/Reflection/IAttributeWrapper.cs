@@ -2,5 +2,6 @@
 {
     public interface IAttributeWrapper
     {
+        string ToString();
     }
 }

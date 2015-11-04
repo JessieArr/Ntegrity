@@ -19,5 +19,7 @@ namespace Ntegrity.Models.Reflection
 
         IEnumerable<IAttributeWrapper> GetCustomAttributes();
         object[] GetCustomAttributes(Type attributeType, bool inherit);
+
+        string ToString();
     }
 }

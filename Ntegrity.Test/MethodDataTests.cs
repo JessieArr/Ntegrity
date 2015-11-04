@@ -7,6 +7,7 @@ using Ntegrity.Models;
 using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
+using Moq;
 
 namespace Ntegrity.Test
 {
@@ -81,6 +82,41 @@ namespace Ntegrity.Test
 
             Assert.That(SUT.AttributeData.Count > 0);
             Assert.That(SUT.AttributeData.Any(x => x.Name == typeof(TestAttributeAttribute).FullName));
+        }
+
+        [Test]
+        public void MethodWithAttributes_SortsAttributes()
+        {
+            var testMethodSignature = "Int32 DeclaringType.Test()";
+            var methodWrapper = new Mock<IMethodInfoWrapper>();
+            methodWrapper.Setup(x => x.ToString())
+                .Returns(testMethodSignature);
+            methodWrapper.SetupGet(x => x.IsPublic)
+                .Returns(true);
+            var declaringType = new Mock<ITypeWrapper>();
+            methodWrapper.SetupGet(x => x.DeclaringType)
+                .Returns(declaringType.Object);
+            var reflectedType = new Mock<ITypeWrapper>();
+            methodWrapper.SetupGet(x => x.ReflectedType)
+                .Returns(reflectedType.Object);
+
+            var firstTestAttribute = new Mock<IAttributeWrapper>();
+            firstTestAttribute.Setup(x => x.ToString())
+                .Returns("ZZZ");
+            var secondTestAttribute = new Mock<IAttributeWrapper>();
+            secondTestAttribute.Setup(x => x.ToString())
+                .Returns("AAA");
+            methodWrapper.Setup(x => x.GetCustomAttributes())
+                .Returns(new List<IAttributeWrapper>()
+                {
+                    firstTestAttribute.Object,
+                    secondTestAttribute.Object,
+                });
+
+            var SUT = new MethodData(methodWrapper.Object);
+            Assert.That(SUT.AttributeData.Count > 0);
+            Assert.That(SUT.AttributeData.First().Name == "AAA");
+            Assert.That(SUT.AttributeData.Last().Name == "ZZZ");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Ntegrity.Models.Reflection;
 
@@ -40,7 +41,7 @@ namespace Ntegrity.Models
 
             if (methodInfo.ReflectedType == null || methodInfo.DeclaringType == null)
             {
-                throw new Exception("Method Lacked Declarign or Reflected Type Data.");
+                throw new Exception("Method Lacked Declaring or Reflected Type Data.");
             }
             if (methodInfo.DeclaringType.FullName != methodInfo.ReflectedType.FullName)
             {
@@ -53,6 +54,7 @@ namespace Ntegrity.Models
             {
                 AttributeData.Add(new AttributeData(attribute));
             }
+            AttributeData = AttributeData.OrderBy(x => x.Name).ToList();
         }
 
         public MethodData(string methodInfo)
