@@ -267,6 +267,7 @@ namespace Ntegrity.Models
                 });
             if (methodsToShow.Any())
             {
+                methodsToShow = methodsToShow.OrderBy(x => x.MethodSignature);
                 returnString += outputSettings.TypePrefix + "METHODS:" + Environment.NewLine;
                 foreach (var method in methodsToShow)
                 {

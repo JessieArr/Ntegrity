@@ -32,5 +32,10 @@ namespace Ntegrity.Models.Reflection
         {
             return ConstructorInfo.GetCustomAttributes(attributeType, inherit).Select(x => new AttributeWrapper((Attribute)x)).ToArray();
         }
+
+        public override string ToString()
+        {
+            return ConstructorInfo.ToString();
+        }
     }
 }

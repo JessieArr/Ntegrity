@@ -34,5 +34,10 @@ namespace Ntegrity.Models.Reflection
         {
             return FieldInfo.GetCustomAttributes(attributeType, inherit);
         }
+
+        public override string ToString()
+        {
+            return FieldInfo.ToString();
+        }
     }
 }

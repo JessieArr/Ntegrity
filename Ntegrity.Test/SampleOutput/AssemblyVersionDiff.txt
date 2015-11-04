@@ -25,5 +25,5 @@ REMOVED ENUMS:
 ADDED ENUMS:
 +	VersionTestAssembly.TestEnum3
 
-Changed ENUMS:
+CHANGED ENUMS:
 

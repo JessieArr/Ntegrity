@@ -36,5 +36,10 @@ namespace Ntegrity.Models.Reflection
         {
             return PropertyInfo.GetCustomAttributes().Select(x => new AttributeWrapper(x));
         }
+
+        public override string ToString()
+        {
+            return PropertyInfo.ToString();
+        }
     }
 }
