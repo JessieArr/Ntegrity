@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
 using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-    public class MethodData
+    public class MethodData : IMethodData
     {
-        public readonly string MethodSignature;
-        public readonly string ReturnType;
-        public readonly bool IsInherited;
-        public readonly string DeclaringType;
-        public readonly AccessLevelEnum AccessLevel;
-        public readonly List<AttributeData> AttributeData = new List<AttributeData>();
+        public string MethodSignature { get; }
+        public string ReturnType { get; }
+        public bool IsInherited { get; }
+        public string DeclaringType { get; }
+        public AccessLevelEnum AccessLevel { get; }
+        public List<IAttributeData> AttributeData { get; }
 
         public MethodData(IMethodInfoWrapper methodInfo)
         {
+            AttributeData = new List<IAttributeData>();
+
             var methodString = methodInfo.ToString();
             var splitIndex = methodString.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
             ReturnType = methodString.Substring(0, splitIndex);
@@ -60,6 +63,8 @@ namespace Ntegrity.Models
 
         public MethodData(string methodInfo)
         {
+            AttributeData = new List<IAttributeData>();
+
             var sanitizedMethodInfo = methodInfo.Replace("\t\t", "");
             var lines = sanitizedMethodInfo.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
@@ -131,5 +136,15 @@ namespace Ntegrity.Models
             returnString += MethodSignature;
             return returnString;
         }
+    }
+
+    public interface IMethodData
+    {
+        string MethodSignature { get; }
+        string ReturnType { get; }
+        bool IsInherited { get; }
+        string DeclaringType { get; }
+        AccessLevelEnum AccessLevel { get; }
+        List<IAttributeData> AttributeData { get; }
     }
 }

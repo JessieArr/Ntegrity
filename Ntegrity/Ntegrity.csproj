@@ -47,6 +47,8 @@
     <Compile Include="Models\AttributeData.cs" />
     <Compile Include="Models\ConstructorData.cs" />
     <Compile Include="Models\Diff\EnumTypeDiff.cs" />
+    <Compile Include="Models\Diff\Interfaces\IMethodDiff.cs" />
+    <Compile Include="Models\Diff\MethodDiff.cs" />
     <Compile Include="Models\Diff\FieldDiff.cs" />
     <Compile Include="Models\Diff\Interfaces\IEnumTypeDiff.cs" />
     <Compile Include="Models\Diff\Interfaces\IFieldDiff.cs" />
