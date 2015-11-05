@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Ntegrity.Models.Reflection
+namespace Ntegrity.Models.Reflection.Interfaces
 {
     public interface IPropertyInfoWrapper
     {

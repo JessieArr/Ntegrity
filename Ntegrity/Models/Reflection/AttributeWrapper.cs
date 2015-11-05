@@ -1,4 +1,5 @@
 using System;
+using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models.Reflection
 {

@@ -8,6 +8,7 @@ using Ntegrity.Models.Reflection;
 using Ntegrity.TestTargetAssembly;
 using NUnit.Framework;
 using Moq;
+using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Test
 {

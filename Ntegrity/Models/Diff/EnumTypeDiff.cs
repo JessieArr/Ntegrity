@@ -3,25 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ntegrity.Models.Diff.Interfaces;
 
 namespace Ntegrity.Models.Diff
 {
-    public class EnumTypeDiff
+    public class EnumTypeDiff : IEnumTypeDiff
     {
-        public bool HasChanged = false;
-        public string Name;
+        public bool HasChanged { get; private set; }
+        public string Name { get; }
 
-        public List<AttributeData> AddedAttributes = new List<AttributeData>();
-        public List<AttributeData> RemovedAttributes = new List<AttributeData>();
+        public List<AttributeData> AddedAttributes { get;  }
+        public List<AttributeData> RemovedAttributes { get; }
 
-        public List<FieldData> AddedFields = new List<FieldData>();
-        public List<FieldData> RemovedFields = new List<FieldData>();
+        public List<FieldData> AddedFields { get; }
+        public List<FieldData> RemovedFields { get; }
 
-        public List<MethodData> AddedMethods = new List<MethodData>();
-        public List<MethodData> RemovedMethods = new List<MethodData>();
+        public List<MethodData> AddedMethods { get; }
+        public List<MethodData> RemovedMethods { get; }
 
         public EnumTypeDiff(EnumTypeData beforeEnum, EnumTypeData afterEnum)
         {
+            AddedAttributes = new List<AttributeData>();
+            RemovedAttributes = new List<AttributeData>();
+
+            AddedFields = new List<FieldData>();
+            RemovedFields = new List<FieldData>();
+
+            AddedMethods = new List<MethodData>();
+            RemovedMethods = new List<MethodData>();
+
             if (beforeEnum.Name != afterEnum.Name)
             {
                 throw new NtegrityException("Attempted to diff two different Enums!");

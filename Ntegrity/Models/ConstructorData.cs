@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Ntegrity.Models.Reflection;
+using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {

@@ -47,7 +47,11 @@
     <Compile Include="Models\AttributeData.cs" />
     <Compile Include="Models\ConstructorData.cs" />
     <Compile Include="Models\Diff\EnumTypeDiff.cs" />
+    <Compile Include="Models\Diff\FieldDiff.cs" />
+    <Compile Include="Models\Diff\Interfaces\IEnumTypeDiff.cs" />
+    <Compile Include="Models\Diff\Interfaces\IFieldDiff.cs" />
     <Compile Include="Models\FieldData.cs" />
+    <Compile Include="Models\Interfaces\IFieldData.cs" />
     <Compile Include="Models\MethodData.cs" />
     <Compile Include="Models\PropertyData.cs" />
     <Compile Include="Models\Reflection\AssemblyNameWrapper.cs" />
@@ -56,15 +60,15 @@
     <Compile Include="Models\Reflection\AttributeWrapper.cs" />
     <Compile Include="Models\Reflection\ConstructorInfoWrapper.cs" />
     <Compile Include="Models\Reflection\FieldInfoWrapper.cs" />
-    <Compile Include="Models\Reflection\IAssemblyNameWrapper.cs" />
-    <Compile Include="Models\Reflection\IAssemblyReflectionHelper.cs" />
-    <Compile Include="Models\Reflection\IAssemblyWrapper.cs" />
-    <Compile Include="Models\Reflection\IAttributeWrapper.cs" />
-    <Compile Include="Models\Reflection\IConstructorInfoWrapper.cs" />
-    <Compile Include="Models\Reflection\IFieldInfoWrapper.cs" />
-    <Compile Include="Models\Reflection\IMethodInfoWrapper.cs" />
-    <Compile Include="Models\Reflection\IPropertyInfoWrapper.cs" />
-    <Compile Include="Models\Reflection\ITypeWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IAssemblyNameWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IAssemblyReflectionHelper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IAssemblyWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IAttributeWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IConstructorInfoWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IFieldInfoWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IMethodInfoWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\IPropertyInfoWrapper.cs" />
+    <Compile Include="Models\Reflection\Interfaces\ITypeWrapper.cs" />
     <Compile Include="Models\Reflection\MethodInfoWrapper.cs" />
     <Compile Include="Models\Reflection\PropertyInfoWrapper.cs" />
     <Compile Include="Models\Reflection\TypeWrapper.cs" />
@@ -95,6 +99,7 @@
   <ItemGroup>
     <None Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM Create a NuGet package for this project and place the .nupkg file in the project's output directory.

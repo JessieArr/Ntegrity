@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Reflection;
 
-namespace Ntegrity.Models.Reflection
+namespace Ntegrity.Models.Reflection.Interfaces
 {
     public interface IAssemblyWrapper
     {

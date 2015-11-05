@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
+using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-    public class FieldData
+    public class FieldData : IFieldData
     {
-        public readonly string FieldSignature;
-        public readonly AccessLevelEnum AccessLevel;
-        public readonly List<AttributeData> AttributeData = new List<AttributeData>();
+        public string FieldSignature { get; }
+        public AccessLevelEnum AccessLevel { get; }
+        public List<AttributeData> AttributeData { get; }
 
         public FieldData(IFieldInfoWrapper fieldInfo)
         {
+            AttributeData = new List<AttributeData>();
+
             FieldSignature = fieldInfo.ToString();
             if (fieldInfo.IsPrivate)
             {
@@ -40,6 +44,7 @@ namespace Ntegrity.Models
 
         public FieldData(string fieldString)
         {
+            AttributeData = new List<AttributeData>();
             var sanitizedMethodInfo = fieldString.Replace("\t\t", "");
             var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
