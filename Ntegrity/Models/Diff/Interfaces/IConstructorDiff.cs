@@ -1,0 +1,14 @@
+﻿using System.Collections.Generic;
+using Ntegrity.Models.Interfaces;
+
+namespace Ntegrity.Models.Diff.Interfaces
+{
+    public interface IConstructorDiff
+    {
+        bool HasChanged { get; }
+        string ConstructorSignature { get; }
+
+        List<IAttributeData> AddedAttributes { get; }
+        List<IAttributeData> RemovedAttributes { get; }
+    }
+}

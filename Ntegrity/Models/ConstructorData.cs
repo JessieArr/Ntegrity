@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
 using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-	public class ConstructorData
-	{
-		public readonly string ConstructorSignature;
-		public readonly AccessLevelEnum AccessLevel;
-		public readonly List<AttributeData> AttributeData = new List<AttributeData>();
+	public class ConstructorData : IConstructorData
+    {
+		public string ConstructorSignature { get; }
+        public AccessLevelEnum AccessLevel { get; }
+        public List<IAttributeData> AttributeData { get; }
 
-		public ConstructorData(IConstructorInfoWrapper constructor)
+        public ConstructorData(IConstructorInfoWrapper constructor)
 		{
-			ConstructorSignature = constructor.ToString();
+            AttributeData = new List<IAttributeData>();
+            ConstructorSignature = constructor.ToString();
 			if (constructor.IsPrivate)
 			{
 				AccessLevel = AccessLevelEnum.Private;
@@ -41,6 +43,8 @@ namespace Ntegrity.Models
 
 	    public ConstructorData(string constructorString)
 	    {
+            AttributeData = new List<IAttributeData>();
+
             var sanitizedMethodInfo = constructorString.Replace("\t\t", "");
             var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
@@ -106,5 +110,12 @@ namespace Ntegrity.Models
 
             return returnString + outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum() + " " + ConstructorSignature;
         }
+    }
+
+    public interface IConstructorData
+    {
+        string ConstructorSignature { get; }
+        AccessLevelEnum AccessLevel { get; }
+        List<IAttributeData> AttributeData { get; }
     }
 }
