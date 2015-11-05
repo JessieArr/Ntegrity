@@ -1,13 +1,14 @@
 ﻿using System;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
 using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-	public class AttributeData
-	{
-		public readonly string Name;
-	    public bool IsCompilerGenerated;
+	public class AttributeData : IAttributeData
+    {
+		public string Name { get; }
+	    public bool IsCompilerGenerated { get; }
 
         public AttributeData(IAttributeWrapper attribute)
         {

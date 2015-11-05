@@ -11,11 +11,11 @@ namespace Ntegrity.Models
     {
         public string FieldSignature { get; }
         public AccessLevelEnum AccessLevel { get; }
-        public List<AttributeData> AttributeData { get; }
+        public List<IAttributeData> AttributeData { get; }
 
         public FieldData(IFieldInfoWrapper fieldInfo)
         {
-            AttributeData = new List<AttributeData>();
+            AttributeData = new List<IAttributeData>();
 
             FieldSignature = fieldInfo.ToString();
             if (fieldInfo.IsPrivate)
@@ -44,7 +44,7 @@ namespace Ntegrity.Models
 
         public FieldData(string fieldString)
         {
-            AttributeData = new List<AttributeData>();
+            AttributeData = new List<IAttributeData>();
             var sanitizedMethodInfo = fieldString.Replace("\t\t", "");
             var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 

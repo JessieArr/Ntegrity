@@ -51,6 +51,7 @@
     <Compile Include="Models\Diff\Interfaces\IEnumTypeDiff.cs" />
     <Compile Include="Models\Diff\Interfaces\IFieldDiff.cs" />
     <Compile Include="Models\FieldData.cs" />
+    <Compile Include="Models\Interfaces\IAttributeData.cs" />
     <Compile Include="Models\Interfaces\IFieldData.cs" />
     <Compile Include="Models\MethodData.cs" />
     <Compile Include="Models\PropertyData.cs" />

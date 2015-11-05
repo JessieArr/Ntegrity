@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ntegrity.Models.Interfaces;
 
 namespace Ntegrity.Models.Diff.Interfaces
 {
@@ -7,7 +8,7 @@ namespace Ntegrity.Models.Diff.Interfaces
         bool HasChanged { get; }
         string FieldSignature { get; }
 
-        List<AttributeData> AddedAttributes { get; }
-        List<AttributeData> RemovedAttributes { get; }
+        List<IAttributeData> AddedAttributes { get; }
+        List<IAttributeData> RemovedAttributes { get; }
     }
 }

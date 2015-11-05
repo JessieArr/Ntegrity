@@ -6,7 +6,7 @@ namespace Ntegrity.Models.Interfaces
     {
         string FieldSignature { get; }
         AccessLevelEnum AccessLevel { get; }
-        List<AttributeData> AttributeData { get; }
+        List<IAttributeData> AttributeData { get; }
         string ToString();
         string ToString(NtegrityOutputSettings outputSettings);
     }

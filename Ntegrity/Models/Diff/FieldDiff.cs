@@ -13,13 +13,13 @@ namespace Ntegrity.Models.Diff
         public bool HasChanged { get; private set; }
         public string FieldSignature { get; }
 
-        public List<AttributeData> AddedAttributes { get; }
-        public List<AttributeData> RemovedAttributes { get; }
+        public List<IAttributeData> AddedAttributes { get; }
+        public List<IAttributeData> RemovedAttributes { get; }
 
         public FieldDiff(IFieldData oldField, IFieldData newField)
         {
-            AddedAttributes = new List<AttributeData>();
-            RemovedAttributes = new List<AttributeData>();
+            AddedAttributes = new List<IAttributeData>();
+            RemovedAttributes = new List<IAttributeData>();
 
             if (oldField.FieldSignature != newField.FieldSignature)
             {
