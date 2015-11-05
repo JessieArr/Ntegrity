@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
 using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-    public class PropertyData
+    public class PropertyData : IPropertyData
     {
-        public readonly string PropertySignature;
-        public readonly AccessLevelEnum GetterAccessLevel;
-        public readonly bool HasGetter;
-        public readonly AccessLevelEnum SetterAccessLevel;
-        public readonly bool HasSetter;
-        public readonly List<AttributeData> AttributeData = new List<AttributeData>();
+        public string PropertySignature { get; }
+        public AccessLevelEnum GetterAccessLevel { get; }
+        public bool HasGetter { get; }
+        public AccessLevelEnum SetterAccessLevel { get; }
+        public bool HasSetter { get; }
+        public List<IAttributeData> AttributeData { get; }
 
         public PropertyData(IPropertyInfoWrapper propertyInfo)
         {
+            AttributeData = new List<IAttributeData>();
             PropertySignature = propertyInfo.ToString();
 
             var getter = propertyInfo.GetGetMethod(true);
@@ -72,6 +74,8 @@ namespace Ntegrity.Models
 
         public PropertyData(string propertyString)
         {
+            AttributeData = new List<IAttributeData>();
+
             var sanitizedMethodInfo = propertyString.Replace("\t\t", "");
             var lines = sanitizedMethodInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 

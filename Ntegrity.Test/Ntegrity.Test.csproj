@@ -68,6 +68,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssemblyInterfaceDataTests.cs" />
+    <Compile Include="PropertyDiffTests.cs" />
+    <Compile Include="ConstructorDiffTests.cs" />
     <Compile Include="MethodDiffTests.cs" />
     <Compile Include="FieldDiffTests.cs" />
     <Compile Include="InterfaceTypeDataTests.cs" />

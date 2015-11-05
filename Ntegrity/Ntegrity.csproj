@@ -46,6 +46,8 @@
     <Compile Include="Models\AssemblyInterfaceData.cs" />
     <Compile Include="Models\AttributeData.cs" />
     <Compile Include="Models\ConstructorData.cs" />
+    <Compile Include="Models\Diff\Interfaces\IPropertyDiff.cs" />
+    <Compile Include="Models\Diff\PropertyDiff.cs" />
     <Compile Include="Models\Diff\EnumTypeDiff.cs" />
     <Compile Include="Models\Diff\Interfaces\IConstructorDiff.cs" />
     <Compile Include="Models\Diff\Interfaces\IMethodDiff.cs" />
@@ -56,7 +58,9 @@
     <Compile Include="Models\Diff\Interfaces\IFieldDiff.cs" />
     <Compile Include="Models\FieldData.cs" />
     <Compile Include="Models\Interfaces\IAttributeData.cs" />
+    <Compile Include="Models\Interfaces\IConstructorData.cs" />
     <Compile Include="Models\Interfaces\IFieldData.cs" />
+    <Compile Include="Models\Interfaces\IPropertyData.cs" />
     <Compile Include="Models\MethodData.cs" />
     <Compile Include="Models\PropertyData.cs" />
     <Compile Include="Models\Reflection\AssemblyNameWrapper.cs" />

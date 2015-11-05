@@ -111,11 +111,4 @@ namespace Ntegrity.Models
             return returnString + outputSettings.MemberPrefix + AccessLevel.GetKeywordFromEnum() + " " + ConstructorSignature;
         }
     }
-
-    public interface IConstructorData
-    {
-        string ConstructorSignature { get; }
-        AccessLevelEnum AccessLevel { get; }
-        List<IAttributeData> AttributeData { get; }
-    }
 }
