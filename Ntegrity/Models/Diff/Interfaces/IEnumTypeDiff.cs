@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ntegrity.Models.Interfaces;
 
 namespace Ntegrity.Models.Diff.Interfaces
 {
@@ -7,13 +8,13 @@ namespace Ntegrity.Models.Diff.Interfaces
         bool HasChanged { get; }
         string Name { get; }
 
-        List<AttributeData> AddedAttributes { get; }
-        List<AttributeData> RemovedAttributes { get; }
+        List<IAttributeData> AddedAttributes { get; }
+        List<IAttributeData> RemovedAttributes { get; }
 
-        List<FieldData> AddedFields { get; }
-        List<FieldData> RemovedFields { get; }
+        List<IFieldData> AddedFields { get; }
+        List<IFieldData> RemovedFields { get; }
 
-        List<MethodData> AddedMethods { get; }
-        List<MethodData> RemovedMethods { get; }
+        List<IMethodData> AddedMethods { get; }
+        List<IMethodData> RemovedMethods { get; }
     }
 }

@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Ntegrity.Models.Interfaces;
 using Ntegrity.Models.Reflection;
 using Ntegrity.Models.Reflection.Interfaces;
 
 namespace Ntegrity.Models
 {
-	public class EnumTypeData
+	public class EnumTypeData : IEnumTypeData
 	{
-		public readonly string Name;
-		public readonly TypeEnum Type;
-		public readonly AccessLevelEnum AccessLevel;
-		
-		public readonly List<AttributeData> AttributeData = new List<AttributeData>();
-        public readonly List<MethodData> MethodData = new List<MethodData>();
-        public readonly List<FieldData> FieldData = new List<FieldData>();
-        public readonly List<string> ImplementsInterfaces;
+		public string Name { get; }
+		public TypeEnum Type { get; }
+        public AccessLevelEnum AccessLevel { get; }
+
+        public List<IAttributeData> AttributeData { get; }
+        public List<IMethodData> MethodData { get; }
+        public List<IFieldData> FieldData { get; }
+        public List<string> ImplementsInterfaces { get; }
 
         public EnumTypeData(ITypeWrapper typeToAnalyze)
 		{
+            AttributeData = new List<IAttributeData>();
+            MethodData = new List<IMethodData>();
+            FieldData = new List<IFieldData>();
+
             if (!typeToAnalyze.IsEnum)
 			{
                 throw new NtegrityException("Type: " + typeToAnalyze.AssemblyQualifiedName + " is not an Enum.");
@@ -71,6 +76,10 @@ namespace Ntegrity.Models
 
 	    public EnumTypeData(string typeString)
 	    {
+            AttributeData = new List<IAttributeData>();
+            MethodData = new List<IMethodData>();
+            FieldData = new List<IFieldData>();
+
             var sanitizedTypeInfo = typeString.Replace("\t", "");
             var lines = sanitizedTypeInfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 

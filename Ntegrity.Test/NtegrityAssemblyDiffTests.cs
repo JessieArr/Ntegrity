@@ -35,7 +35,7 @@ namespace Ntegrity.Test
         }
 
         [Test]
-        public void Test()
+        public void RealDLLTest()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
 
@@ -59,5 +59,23 @@ namespace Ntegrity.Test
             Assert.That(SUT.RemovedEnums.Count == 1);
             Assert.That(SUT.AddedEnums.Count == 1);
         }
-    }
+
+		[Test]
+		public void ToString_DoesNotThrow()
+		{
+			var currentDirectory = Directory.GetCurrentDirectory();
+
+			var v1Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory
+				+ "\\TestAssemblyVersions\\VersionTestAssembly.1.0.0.0.dll"));
+			var v1AssemblyInterfaceData = new AssemblyInterfaceData(v1Assembly);
+
+			var v2Assembly = new AssemblyWrapper(Assembly.LoadFile(currentDirectory
+				+ "\\TestAssemblyVersions\\VersionTestAssembly.2.0.0.0.dll"));
+			var v2AssemblyInterfaceData = new AssemblyInterfaceData(v2Assembly);
+
+			var SUT = new NtegrityAssemblyDiff(v1AssemblyInterfaceData, v2AssemblyInterfaceData);
+
+			Assert.That(SUT.ToString() != null);
+		}
+	}
 }

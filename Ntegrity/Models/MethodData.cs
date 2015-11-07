@@ -146,5 +146,8 @@ namespace Ntegrity.Models
         string DeclaringType { get; }
         AccessLevelEnum AccessLevel { get; }
         List<IAttributeData> AttributeData { get; }
+
+        string ToString();
+        string ToString(NtegrityOutputSettings outputSettings);
     }
 }

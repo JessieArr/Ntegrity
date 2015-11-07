@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ntegrity.Models.Diff.Interfaces;
+using Ntegrity.Models.Interfaces;
 
 namespace Ntegrity.Models.Diff
 {
@@ -12,25 +13,25 @@ namespace Ntegrity.Models.Diff
         public bool HasChanged { get; private set; }
         public string Name { get; }
 
-        public List<AttributeData> AddedAttributes { get;  }
-        public List<AttributeData> RemovedAttributes { get; }
+        public List<IAttributeData> AddedAttributes { get;  }
+        public List<IAttributeData> RemovedAttributes { get; }
 
-        public List<FieldData> AddedFields { get; }
-        public List<FieldData> RemovedFields { get; }
+        public List<IFieldData> AddedFields { get; }
+        public List<IFieldData> RemovedFields { get; }
 
-        public List<MethodData> AddedMethods { get; }
-        public List<MethodData> RemovedMethods { get; }
+        public List<IMethodData> AddedMethods { get; }
+        public List<IMethodData> RemovedMethods { get; }
 
-        public EnumTypeDiff(EnumTypeData beforeEnum, EnumTypeData afterEnum)
+        public EnumTypeDiff(IEnumTypeData beforeEnum, IEnumTypeData afterEnum)
         {
-            AddedAttributes = new List<AttributeData>();
-            RemovedAttributes = new List<AttributeData>();
+            AddedAttributes = new List<IAttributeData>();
+            RemovedAttributes = new List<IAttributeData>();
 
-            AddedFields = new List<FieldData>();
-            RemovedFields = new List<FieldData>();
+            AddedFields = new List<IFieldData>();
+            RemovedFields = new List<IFieldData>();
 
-            AddedMethods = new List<MethodData>();
-            RemovedMethods = new List<MethodData>();
+            AddedMethods = new List<IMethodData>();
+            RemovedMethods = new List<IMethodData>();
 
             if (beforeEnum.Name != afterEnum.Name)
             {
@@ -43,7 +44,7 @@ namespace Ntegrity.Models.Diff
             GetAddedAndRemovedMethods(beforeEnum, afterEnum);
         }
 
-        private void GetAddedAndRemovedAttributes(EnumTypeData beforeEnum, EnumTypeData afterEnum)
+        private void GetAddedAndRemovedAttributes(IEnumTypeData beforeEnum, IEnumTypeData afterEnum)
         {
             foreach (var oldAttribute in beforeEnum.AttributeData)
             {
@@ -63,7 +64,7 @@ namespace Ntegrity.Models.Diff
             }
         }
 
-        private void GetAddedAndRemovedFields(EnumTypeData beforeEnum, EnumTypeData afterEnum)
+        private void GetAddedAndRemovedFields(IEnumTypeData beforeEnum, IEnumTypeData afterEnum)
         {
             foreach (var oldField in beforeEnum.FieldData)
             {
@@ -83,7 +84,7 @@ namespace Ntegrity.Models.Diff
             }
         }
 
-        private void GetAddedAndRemovedMethods(EnumTypeData beforeEnum, EnumTypeData afterEnum)
+        private void GetAddedAndRemovedMethods(IEnumTypeData beforeEnum, IEnumTypeData afterEnum)
         {
             foreach (var oldMethod in beforeEnum.MethodData)
             {
