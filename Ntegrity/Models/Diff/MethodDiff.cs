@@ -49,5 +49,30 @@ namespace Ntegrity.Models.Diff
                 }
             }
         }
-    }
+
+		public override string ToString()
+		{
+			return ToString(new NtegrityOutputSettings());
+		}
+
+		private const string AttributesPrefix = "ATTRIBUTES:";
+		public string ToString(NtegrityOutputSettings outputSettings)
+		{
+			var returnString = MethodSignature + Environment.NewLine;
+			// ATTRIBUTES
+			returnString += "\t\t" + AttributesPrefix + Environment.NewLine;
+			foreach (var removedAttribute in RemovedAttributes)
+			{
+				returnString += "-\t\t\t" + removedAttribute.Name + Environment.NewLine;
+			}
+			returnString += Environment.NewLine;
+
+			foreach (var addedAttribute in AddedAttributes)
+			{
+				returnString += "+\t\t\t" + addedAttribute.Name + Environment.NewLine;
+			}
+
+			return returnString;
+		}
+	}
 }

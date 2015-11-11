@@ -1,0 +1,29 @@
+	Namespace.TestEnum
+	ATTRIBUTES:
+-		Namespace.RemovedAttribute
+
++		Namespace.AddedAttribute
+
+	FIELDS:
+-		Namespace.RemovedField
+
++		Namespace.AddedField
+
+^		Namespace.ModifiedField
+		ATTRIBUTES:
+-			Namespace.RemovedAttribute
+
++			Namespace.AddedAttribute
+
+
+	METHODS:
+-		Namespace.RemovedMethod
+
++		Namespace.AddedMethod
+
+^		Namespace.ModifiedMethod
+		ATTRIBUTES:
+-			Namespace.RemovedAttribute
+
++			Namespace.AddedAttribute
+

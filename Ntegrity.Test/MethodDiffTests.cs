@@ -130,5 +130,5 @@ namespace Ntegrity.Test
             var SUT = new MethodDiff(oldField.Object, newField.Object);
             Assert.False(SUT.HasChanged);
         }
-    }
+	}
 }

@@ -85,6 +85,7 @@
     <Compile Include="NtegrityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClassTypeDataTests.cs" />
+    <Compile Include="TestMockGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,6 +108,7 @@
     <Content Include="SampleOutput\AssemblyVersionDiff.txt" />
     <Content Include="SampleOutput\EntityFramework.Interface.txt" />
     <Content Include="SampleOutput\NUnit.Interface.txt" />
+    <Content Include="SampleOutput\TestArea\EnumDiffTestOutput.txt" />
     <Content Include="SampleT4Templates\Ntegrity.TestTargetAssembly.Interface.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

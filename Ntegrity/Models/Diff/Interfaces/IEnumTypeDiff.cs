@@ -12,9 +12,10 @@ namespace Ntegrity.Models.Diff.Interfaces
         List<IAttributeData> RemovedAttributes { get; }
 
         List<IFieldData> AddedFields { get; }
-        List<IFieldData> RemovedFields { get; }
+		List<IFieldData> RemovedFields { get; }
+		List<IFieldDiff> ModifiedFields { get; }
 
-        List<IMethodData> AddedMethods { get; }
+		List<IMethodData> AddedMethods { get; }
         List<IMethodData> RemovedMethods { get; }
     }
 }
