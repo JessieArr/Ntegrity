@@ -9,3 +9,4 @@ packages/*
 *.crunchsolution.cache
 *.ncrunchsolution.user
 */_CreateNewNuGetPackage/*
+\.vs/*
